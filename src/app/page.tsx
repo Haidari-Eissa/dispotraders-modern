@@ -13,11 +13,11 @@ import {
 } from "lucide-react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.08 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: 0.1 * i, duration: 0.5, ease: "easeOut" },
   }),
 };
 
@@ -35,26 +35,26 @@ function Section({
   children?: React.ReactNode;
 }) {
   return (
-    <section id={id} className="relative py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id={id} className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           {eyebrow ? (
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-              <Sparkles className="h-3.5 w-3.5" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
               {eyebrow}
             </div>
           ) : null}
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             {title}
           </h2>
           {desc ? (
-            <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">
               {desc}
             </p>
           ) : null}
         </div>
 
-        {children ? <div className="mt-10">{children}</div> : null}
+        {children ? <div className="mt-16">{children}</div> : null}
       </div>
     </section>
   );
@@ -70,18 +70,18 @@ function Card({
   text: string;
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur">
-      <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute -right-24 -bottom-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+    <div className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:shadow-md hover:border-primary/20">
+      <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -right-24 -bottom-24 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
       </div>
-      <div className="relative flex items-start gap-4">
-        <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-white">
+      <div className="relative flex flex-col gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-secondary text-primary">
           {icon}
         </div>
         <div>
-          <p className="text-lg font-semibold text-white">{title}</p>
-          <p className="mt-2 text-sm leading-relaxed text-white/70">{text}</p>
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
         </div>
       </div>
     </div>
@@ -90,8 +90,8 @@ function Card({
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-      <Check className="h-3.5 w-3.5" />
+    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/30 px-3 py-1 text-xs font-medium text-muted-foreground">
+      <Check className="h-3.5 w-3.5 text-primary" />
       {children}
     </span>
   );
@@ -100,49 +100,48 @@ function Pill({ children }: { children: React.ReactNode }) {
 export default function Page() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 400], [0, 60]);
-  const heroOpacity = useTransform(scrollY, [0, 280], [1, 0.6]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const phone = "+123 456 7890"; // <- replace
   const whatsapp = "https://wa.me/1234567890"; // <- replace (digits only)
 
   return (
-    <main className="min-h-screen bg-[#070A0F] text-white">
-      {/* Background */}
-      <div className="pointer-events-none fixed inset-0">
-        <div className="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.25),transparent_60%)] blur-2xl" />
-        <div className="absolute bottom-[-220px] left-[-200px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)] blur-2xl" />
-        <div className="absolute bottom-[-220px] right-[-200px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(236,72,153,0.16),transparent_60%)] blur-2xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.04),transparent_40%,rgba(255,255,255,0.02))]" />
-        <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:18px_18px] opacity-[0.25]" />
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/10">
+      {/* Background Gradients */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute -top-[20%] left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute top-[20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-purple-500/5 blur-3xl" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
       </div>
 
       {/* Sticky Nav */}
-      <div className="sticky top-0 z-50 border-b border-white/10 bg-[#070A0F]/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Package className="h-5 w-5" />
             </div>
-            <span className="font-semibold tracking-tight">Dispotraders</span>
+            <span className="font-bold tracking-tight text-foreground">Dispotraders</span>
           </div>
 
-          <div className="hidden items-center gap-6 text-sm text-white/70 md:flex">
-            <a className="hover:text-white" href="#why">Why</a>
-            <a className="hover:text-white" href="#products">Products</a>
-            <a className="hover:text-white" href="#about">About</a>
-            <a className="hover:text-white" href="#contact">Contact</a>
+          <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
+            <a className="transition-colors hover:text-foreground" href="#why">Why</a>
+            <a className="transition-colors hover:text-foreground" href="#products">Products</a>
+            <a className="transition-colors hover:text-foreground" href="#about">About</a>
+            <a className="transition-colors hover:text-foreground" href="#contact">Contact</a>
           </div>
 
           <div className="flex items-center gap-3">
             <a
               href={whatsapp}
-              className="hidden rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/90 hover:bg-white/10 sm:inline-flex"
+              className="hidden rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:inline-flex"
             >
               WhatsApp
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
               Get offer <ArrowRight className="h-4 w-4" />
             </a>
@@ -151,14 +150,14 @@ export default function Page() {
       </div>
 
       {/* HERO */}
-      <section className="relative">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }}>
+      <section className="relative z-10 pt-20 pb-16 sm:pt-32 sm:pb-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="max-w-3xl">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              className="inline-flex flex-wrap items-center gap-2"
+              className="mb-6 inline-flex flex-wrap items-center gap-2"
             >
               <Pill>Fast delivery in Quetta</Pill>
               <Pill>Clean & hygienic</Pill>
@@ -170,12 +169,10 @@ export default function Page() {
               animate="visible"
               custom={1}
               variants={fadeUp}
-              className="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl"
+              className="text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
             >
               Disposable tableware that looks clean,
-              <span className="bg-gradient-to-r from-indigo-300 via-cyan-200 to-pink-200 bg-clip-text text-transparent">
-                {" "}works fast{" "}
-              </span>
+              <span className="text-muted-foreground"> works fast </span>
               and saves time.
             </motion.h1>
 
@@ -184,7 +181,7 @@ export default function Page() {
               animate="visible"
               custom={2}
               variants={fadeUp}
-              className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg"
+              className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl"
             >
               Cups, plates, containers, packaging and more — for shops, events and families.
               Simple ordering, quick response, reliable supply in Quetta (Hazara Town to Mari Abad).
@@ -195,25 +192,25 @@ export default function Page() {
               animate="visible"
               custom={3}
               variants={fadeUp}
-              className="mt-10 flex flex-col gap-3 sm:flex-row"
+              className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
               <a
                 href="#products"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-black shadow-lg shadow-white/10 hover:bg-white/90"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
               >
-                View products <ArrowRight className="h-5 w-5" />
+                View products <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={whatsapp}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-semibold text-white hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-secondary-foreground/10"
               >
-                WhatsApp order <Phone className="h-5 w-5" />
+                WhatsApp order <Phone className="h-4 w-4" />
               </a>
             </motion.div>
           </motion.div>
 
           {/* Floating highlight cards */}
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
+          <div className="mt-20 grid gap-6 sm:grid-cols-3">
             {[
               { t: "Hygienic supply", d: "Packed & ready to use — clean service for your customers.", i: <ShieldCheck className="h-5 w-5" /> },
               { t: "Quick response", d: "Fast replies and simple ordering via WhatsApp or call.", i: <Timer className="h-5 w-5" /> },
@@ -221,19 +218,19 @@ export default function Page() {
             ].map((x, i) => (
               <motion.div
                 key={x.t}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.08 * i, duration: 0.6 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                className="rounded-2xl border border-border bg-card/50 p-6 backdrop-blur-sm"
               >
                 <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-primary">
                     {x.i}
                   </div>
-                  <p className="font-semibold">{x.t}</p>
+                  <p className="font-semibold text-foreground">{x.t}</p>
                 </div>
-                <p className="mt-3 text-sm text-white/70">{x.d}</p>
+                <p className="mt-3 text-sm text-muted-foreground">{x.d}</p>
               </motion.div>
             ))}
           </div>
@@ -249,22 +246,22 @@ export default function Page() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <Card
-            icon={<ShieldCheck className="h-5 w-5" />}
+            icon={<ShieldCheck className="h-6 w-6" />}
             title="Hygienic & safe"
             text="Disposable tableware helps you serve cleanly — perfect for shops, street food and events."
           />
           <Card
-            icon={<Timer className="h-5 w-5" />}
+            icon={<Timer className="h-6 w-6" />}
             title="Save time"
             text="No washing, no stress. Use and move on — focus on your business."
           />
           <Card
-            icon={<Package className="h-5 w-5" />}
+            icon={<Package className="h-6 w-6" />}
             title="Product range"
             text="Plastic and aluminum options — cups, plates, containers, packaging."
           />
           <Card
-            icon={<Check className="h-5 w-5" />}
+            icon={<Check className="h-6 w-6" />}
             title="Affordable pricing"
             text="Good value for daily use and bulk orders."
           />
@@ -289,22 +286,22 @@ export default function Page() {
           ].map((p, i) => (
             <motion.div
               key={p.name}
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.55 }}
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 hover:bg-white/[0.06]"
+              transition={{ delay: i * 0.05, duration: 0.5 }}
+              className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/20 hover:shadow-md"
             >
               <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold">{p.name}</p>
-                <ArrowRight className="h-4 w-4 text-white/40 group-hover:text-white/80" />
+                <p className="text-lg font-semibold text-foreground">{p.name}</p>
+                <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
               </div>
-              <p className="mt-3 text-sm text-white/70">{p.info}</p>
-              <div className="mt-5 flex gap-2 text-xs text-white/60">
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+              <p className="mt-3 text-sm text-muted-foreground">{p.info}</p>
+              <div className="mt-5 flex gap-2 text-xs font-medium text-muted-foreground/80">
+                <span className="rounded-full bg-secondary px-2.5 py-0.5">
                   Bulk
                 </span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                <span className="rounded-full bg-secondary px-2.5 py-0.5">
                   Quick order
                 </span>
               </div>
@@ -321,25 +318,25 @@ export default function Page() {
         desc="From Hazara Town to Mari Abad — we support shops, vendors and families with clean disposable solutions."
       >
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-            <p className="text-white/80">
+          <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
+            <p className="text-lg leading-relaxed text-muted-foreground">
               We supply high-quality disposable tableware for Quetta. Our goal is simple:
-              <span className="text-white"> clean, affordable, convenient.</span>
+              <span className="font-medium text-foreground"> clean, affordable, convenient.</span>
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-2">
               <Pill>Shops</Pill>
               <Pill>Events</Pill>
               <Pill>Families</Pill>
             </div>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5">
-                <MapPin className="h-5 w-5" />
+          <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+                <MapPin className="h-6 w-6" />
               </div>
               <div>
-                <p className="font-semibold">Service area</p>
-                <p className="mt-2 text-sm text-white/70">
+                <p className="font-semibold text-foreground">Service area</p>
+                <p className="mt-2 text-muted-foreground">
                   Main Kirani Road, Hussain Abad, Hazara Town, Quetta
                 </p>
               </div>
@@ -350,66 +347,60 @@ export default function Page() {
 
       {/* CONTACT */}
       <div id="contact" className="h-px" />
-      <section className="relative py-20 sm:py-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 sm:p-12">
+      <section className="relative py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="overflow-hidden rounded-[2.5rem] border border-border bg-card shadow-sm">
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+              <div className="p-10 sm:p-16">
+                <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground">
                   <Phone className="h-3.5 w-3.5" />
                   Contact
                 </div>
-                <h3 className="mt-4 text-3xl font-extrabold tracking-tight">
+                <h3 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Get a quick offer today.
                 </h3>
-                <p className="mt-4 text-white/70">
+                <p className="mt-4 text-lg text-muted-foreground">
                   Tell us what you need (cups, plates, containers). We answer fast.
                 </p>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <a
                     href={whatsapp}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-black hover:bg-white/90"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90"
                   >
                     WhatsApp <ArrowRight className="h-5 w-5" />
                   </a>
                   <a
                     href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-semibold text-white hover:bg-white/10"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary"
                   >
                     Call {phone}
                   </a>
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-black/30 p-6">
-                <p className="font-semibold">Location</p>
-                <p className="mt-2 text-sm text-white/70">
-                  Main Kirani Road, Hussain Abad, Hazara Town, Quetta
-                </p>
-                <div className="mt-5 overflow-hidden rounded-xl border border-white/10">
-                  <iframe
-                    title="map"
-                    src="https://www.google.com/maps?q=Hazara%20Town%20Quetta&output=embed"
-                    width="100%"
-                    height="260"
-                    loading="lazy"
-                    className="block"
-                  />
+              <div className="relative min-h-[300px] border-t border-border bg-secondary/20 md:border-t-0 md:border-l">
+                <div className="absolute inset-0 p-6">
+                  <div className="h-full w-full overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
+                    <iframe
+                      title="map"
+                      src="https://www.google.com/maps?q=Hazara%20Town%20Quetta&output=embed"
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      className="block h-full w-full"
+                    />
+                  </div>
                 </div>
-                <p className="mt-4 text-xs text-white/50">
-                  Replace map URL later with your exact pin.
-                </p>
               </div>
             </div>
           </div>
 
-          <footer className="py-10 text-center text-sm text-white/45">
-            © {new Date().getFullYear()} Dispotraders
+          <footer className="mt-16 text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Dispotraders. All rights reserved.
           </footer>
         </div>
       </section>
     </main>
   );
 }
-
