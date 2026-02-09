@@ -110,10 +110,9 @@ export default function Page() {
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/10">
       {/* Background Gradients */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-[20%] left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -top-[20%] left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/5 blur-3xl" />
         <div className="absolute top-[20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-3xl" />
         <div className="absolute bottom-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-purple-500/5 blur-3xl" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
       </div>
 
       {/* Sticky Nav */}
@@ -170,7 +169,7 @@ export default function Page() {
               animate="visible"
               custom={1}
               variants={fadeUp}
-              className="text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
+              className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl"
             >
               Disposable tableware that looks clean,
               <span className="text-muted-foreground"> works fast </span>
@@ -182,7 +181,7 @@ export default function Page() {
               animate="visible"
               custom={2}
               variants={fadeUp}
-              className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl"
+              className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl"
             >
               Cups, plates, containers, packaging and more — for shops, events and families.
               Simple ordering, quick response, reliable supply in Quetta (Hazara Town to Mari Abad).
@@ -193,17 +192,17 @@ export default function Page() {
               animate="visible"
               custom={3}
               variants={fadeUp}
-              className="mt-10 flex flex-col gap-4 sm:flex-row"
+              className="mt-8 flex flex-col gap-4 sm:flex-row"
             >
               <a
                 href="#products"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
               >
                 View products <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={whatsapp}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-secondary-foreground/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-secondary-foreground/10"
               >
                 WhatsApp order <Phone className="h-4 w-4" />
               </a>
@@ -367,13 +366,13 @@ export default function Page() {
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <a
                     href={whatsapp}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90"
                   >
-                    WhatsApp <ArrowRight className="h-5 w-5" />
+                    WhatsApp <ArrowRight className="h-4 w-4" />
                   </a>
                   <a
                     href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary"
                   >
                     Call {phone}
                   </a>
