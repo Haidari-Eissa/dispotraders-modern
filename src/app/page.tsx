@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
 import type { Variants } from "framer-motion";
 import {
   ArrowRight,
@@ -98,6 +99,91 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
+function CupIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M5 11h14l-1.5 10h-11L5 11Z" />
+      <path d="M5.5 11V8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3" />
+      <path d="M9 11v10" />
+    </svg>
+  );
+}
+
+function PlateIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M12 2a10 10 0 1 0 10 10" />
+      <path d="M12 12a5 5 0 1 0 5 5" />
+    </svg>
+  );
+}
+
+function BackgroundParticles() {
+  const particles = React.useMemo(() => {
+    const particleTypes = [CupIcon, PlateIcon];
+    return Array.from({ length: 15 }).map((_, i) => ({
+      id: i,
+      Icon: particleTypes[i % 2],
+      style: {
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        width: Math.random() * 24 + 16,
+        height: Math.random() * 24 + 16,
+        opacity: Math.random() * 0.05 + 0.02,
+      },
+      animate: {
+        x: (Math.random() - 0.5) * 200,
+        y: (Math.random() - 0.5) * 200,
+      },
+      transition: {
+        duration: Math.random() * 20 + 20,
+        repeat: Infinity,
+        repeatType: "mirror" as const,
+        ease: "linear" as const,
+        delay: Math.random() * 5,
+      },
+    }));
+  }, []);
+
+  return (
+    <>
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute"
+          style={particle.style}
+          animate={particle.animate}
+          transition={particle.transition}
+        >
+          <particle.Icon className="h-full w-full text-muted-foreground/50" />
+        </motion.div>
+      ))}
+    </>
+  );
+}
+
 export default function Page() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 400], [0, 60]);
@@ -113,6 +199,7 @@ export default function Page() {
         <div className="absolute -top-[20%] left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/5 blur-3xl" />
         <div className="absolute top-[20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-3xl" />
         <div className="absolute bottom-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-purple-500/5 blur-3xl" />
+        <BackgroundParticles />
       </div>
 
       {/* Sticky Nav */}
