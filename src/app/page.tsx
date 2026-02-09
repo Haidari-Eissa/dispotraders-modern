@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import type { Variants } from "framer-motion";
 import {
   ArrowRight,
   Check,
@@ -12,9 +13,9 @@ import {
   Timer,
 } from "lucide-react";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({
+  visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
     transition: { delay: 0.1 * i, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
