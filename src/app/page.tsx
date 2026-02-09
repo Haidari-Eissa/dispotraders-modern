@@ -151,7 +151,7 @@ function BackgroundParticles() {
         left: `${Math.random() * 100}%`,
         width: Math.random() * 24 + 16,
         height: Math.random() * 24 + 16,
-        opacity: Math.random() * 0.05 + 0.02,
+        opacity: Math.random() * 0.1 + 0.05,
       },
       animate: {
         x: (Math.random() - 0.5) * 200,
