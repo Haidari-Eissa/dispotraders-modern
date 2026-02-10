@@ -1,12 +1,25 @@
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "ur" }];
-}
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-export default function LangLayout({
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+export const metadata: Metadata = {
+  title: "Dispotraders",
+  description: "Disposable tableware for Quetta.",
+};
+
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
 }) {
-  return <>{children}</>;
+  return (
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} antialiased`}>{children}</body>
+    </html>
+  );
 }
