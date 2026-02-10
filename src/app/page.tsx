@@ -14,12 +14,16 @@ import {
   Timer,
 } from "lucide-react";
 
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "ur" }];
+}
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.1 * i, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: 0.1 * i, duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
@@ -37,7 +41,7 @@ function Section({
   children?: React.ReactNode;
 }) {
   return (
-    <section id={id} className="relative py-24 sm:py-32">
+    <section id={id} className="relative py-28 sm:py-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           {eyebrow ? (
@@ -46,7 +50,7 @@ function Section({
               {eyebrow}
             </div>
           ) : null}
-          <h2 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             {title}
           </h2>
           {desc ? (
@@ -237,7 +241,7 @@ export default function Page() {
       </div>
 
       {/* HERO */}
-      <section className="relative z-10 pt-20 pb-16 sm:pt-32 sm:pb-24">
+      <section className="relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div style={{ y: heroY, opacity: heroOpacity }} className="max-w-3xl">
             <motion.div
@@ -256,7 +260,7 @@ export default function Page() {
               animate="visible"
               custom={1}
               variants={fadeUp}
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl"
+              className="text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
             >
               Disposable tableware that looks clean,
               <span className="text-muted-foreground"> works fast </span>
@@ -434,16 +438,16 @@ export default function Page() {
 
       {/* CONTACT */}
       <div id="contact" className="h-px" />
-      <section className="relative py-24 sm:py-32">
+      <section className="relative py-28 sm:py-40">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="overflow-hidden rounded-[2.5rem] border border-border bg-card shadow-sm">
-            <div className="grid gap-10 md:grid-cols-2 md:items-center">
+            <div className="grid md:grid-cols-2">
               <div className="p-10 sm:p-16">
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground">
                   <Phone className="h-3.5 w-3.5" />
                   Contact
                 </div>
-                <h3 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                <h3 className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
                   Get a quick offer today.
                 </h3>
                 <p className="mt-4 text-lg text-muted-foreground">
