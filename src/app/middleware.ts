@@ -1,20 +1,8 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const locales = ["en", "ur"];
-const defaultLocale = "en";
-
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathnameHasLocale) return;
-
-  request.nextUrl.pathname = `/${defaultLocale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  // This middleware is temporarily disabled to restore single-language functionality.
+  // Internationalization routing can be re-enabled here when ready.
 }
 
 export const config = {
