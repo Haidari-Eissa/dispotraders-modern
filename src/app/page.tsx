@@ -14,10 +14,6 @@ import {
   Timer,
 } from "lucide-react";
 
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "ur" }];
-}
-
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
