@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lazy": "npm run build && git add . && git commit -m \"update\" && git push"
   },
   "dependencies": {
     "framer-motion": "^12.33.0",
@@ -26,4 +27,4 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   }
-}
+} 
