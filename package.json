@@ -10,7 +10,7 @@
     "lazy": "npm run build && git add . && git commit -m \"update\" && git push"
   },
   "dependencies": {
-    "framer-motion": "^12.33.0",
+    "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",
     "react": "19.2.3",
@@ -27,4 +27,4 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   }
-} 
+}
