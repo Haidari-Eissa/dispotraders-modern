@@ -1,21 +1,28 @@
-import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Header from '@/components/Header';
 
 export default function Page() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 gap-8">
-      {/* 1. This puts the buttons at the top of your screen */}
-      <div className="w-full max-w-md flex justify-end">
-        <LanguageSwitcher />
-      </div>
+    <div className="min-h-screen flex flex-col">
+      {/* The Header now contains the Language Switcher automatically */}
+      <Header />
 
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Dispotraders</h1>
-        <p className="text-xl">Quality Disposable Tableware for Quetta</p>
-      </div>
-      
-      <button className="px-6 py-2 bg-blue-600 rounded-lg hover:bg-blue-500 transition">
-        Contact Us
-      </button>
-    </main>
+      <main className="flex-1 flex flex-col items-center justify-center p-8 gap-8 text-center">
+        <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
+          Dispotraders
+        </h1>
+        <p className="text-xl text-gray-400 max-w-2xl">
+          Premium disposable tableware for Quetta. Quality, hygiene, and reliability for every event.
+        </p>
+        
+        <div className="flex gap-4">
+          <button className="px-8 py-3 bg-blue-600 rounded-full font-semibold hover:bg-blue-500 transition shadow-lg shadow-blue-500/20">
+            Order Now
+          </button>
+          <button className="px-8 py-3 border border-gray-700 rounded-full font-semibold hover:bg-gray-800 transition">
+            Learn More
+          </button>
+        </div>
+      </main>
+    </div>
   );
-} 
+}
