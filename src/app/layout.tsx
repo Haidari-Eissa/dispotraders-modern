@@ -14,12 +14,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang?: string };
 }) {
+  // Logic: if the folder name is 'ur', set direction to Right-to-Left (RTL)
+  const isUrdu = params?.lang === 'ur';
+
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+    <html lang={params?.lang || 'de'} dir={isUrdu ? 'rtl' : 'ltr'} className="dark">
+      <body className={`${inter.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
