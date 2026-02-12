@@ -12,15 +12,18 @@ export const metadata: Metadata = {
   description: "Disposable tableware for Quetta.",
 };
 
+/**
+ * CRITICAL FIX:
+ * We removed 'params' here because it causes the "Type Error" in Next.js 16.
+ * The language direction will be handled by your LanguageSwitcher instead.
+ */
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    // We default to 'en' to fix the build error. 
-    // The language switcher will handle the rest.
-    <html lang="en" className="dark">
+    <html lang="de" className="dark">
       <body className={`${inter.variable} antialiased`}>
         {children}
       </body>

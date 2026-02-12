@@ -7,7 +7,7 @@ export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Automatically check RTL whenever the URL changes
+  // This simple logic flips the site to RTL when the URL has '/ur'
   useEffect(() => {
     if (pathname?.includes('/ur')) {
       document.documentElement.dir = 'rtl';
@@ -19,18 +19,16 @@ export default function LanguageSwitcher() {
   }, [pathname]);
 
   const handleSwitch = (newLang: string) => {
-    const path = pathname?.replace(/^\/(en|ur)/, '') || '/';
-    // If switching to German (default), go to root /
-    // Otherwise go to /en or /ur
-    if (newLang === 'de') router.push(path);
-    else router.push(`/${newLang}${path}`);
+    const cleanPath = pathname?.replace(/^\/(en|ur)/, '') || '/';
+    if (newLang === 'de') router.push(cleanPath);
+    else router.push(`/${newLang}${cleanPath}`);
   };
 
   return (
-    <div className="flex gap-4 text-sm font-bold bg-gray-800 p-3 rounded-full">
-      <button onClick={() => handleSwitch('de')} className="hover:text-blue-400">DE</button>
-      <button onClick={() => handleSwitch('en')} className="hover:text-blue-400">EN</button>
-      <button onClick={() => handleSwitch('ur')} className="hover:text-blue-400">اردو</button>
+    <div className="flex gap-4 p-4 text-sm font-bold justify-end">
+      <button onClick={() => handleSwitch('de')}>DE</button>
+      <button onClick={() => handleSwitch('en')}>EN</button>
+      <button onClick={() => handleSwitch('ur')}>اردو</button>
     </div>
   );
 }
