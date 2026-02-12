@@ -14,16 +14,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { lang?: string };
 }) {
-  // Logic: if the folder name is 'ur', set direction to Right-to-Left (RTL)
-  const isUrdu = params?.lang === 'ur';
-
   return (
-    <html lang={params?.lang || 'de'} dir={isUrdu ? 'rtl' : 'ltr'} className="dark">
+    // We default to 'en' to fix the build error. 
+    // The language switcher will handle the rest.
+    <html lang="en" className="dark">
       <body className={`${inter.variable} antialiased`}>
         {children}
       </body>
