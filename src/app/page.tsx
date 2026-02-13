@@ -15,9 +15,6 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary } from '@/lib/dictionaries';
 
-/**
- * LAZY FIX: Keep ': any' to prevent TypeScript strict errors.
- */
 const fadeUp: any = {
   hidden: { opacity: 0, y: 20 },
   visible: (i = 0) => ({
@@ -137,15 +134,15 @@ export default function Page() {
             <span className="font-bold tracking-tight text-foreground">Dispotraders</span>
           </div>
 
+          {/* TRANSLATED NAVIGATION */}
           <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
-            <a className="transition-colors hover:text-foreground" href="#why">Why</a>
-            <a className="transition-colors hover:text-foreground" href="#products">Products</a>
-            <a className="transition-colors hover:text-foreground" href="#about">About</a>
-            <a className="transition-colors hover:text-foreground" href="#contact">Contact</a>
+            <a className="transition-colors hover:text-foreground" href="#why">{dict.navigation.why}</a>
+            <a className="transition-colors hover:text-foreground" href="#products">{dict.navigation.products}</a>
+            <a className="transition-colors hover:text-foreground" href="#about">{dict.navigation.about}</a>
+            <a className="transition-colors hover:text-foreground" href="#contact">{dict.navigation.contact}</a>
           </div>
 
           <div className="flex items-center gap-3">
-             {/* --- FIX: Removed 'hidden sm:block' so it shows on mobile --- */}
              <div className="block">
                 <LanguageSwitcher />
              </div>
@@ -154,13 +151,13 @@ export default function Page() {
               href={whatsapp}
               className="hidden rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:inline-flex"
             >
-              WhatsApp
+              {dict.navigation.whatsapp}
             </a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
-              Get offer <ArrowRight className="h-4 w-4" />
+              {dict.navigation.get_offer} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -284,24 +281,17 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* PRODUCTS (KEPT STATIC FOR NOW, or map if you add them to dict later) */}
+      {/* PRODUCTS (FULLY TRANSLATED via dictionary loop) */}
       <div id="products" className="h-px" />
       <Section
-        eyebrow="Products"
-        title="Best sellers"
-        desc="Start with these. Later you can add real products + pictures."
+        eyebrow={dict.products.eyebrow}
+        title={dict.products.title}
+        desc={dict.products.desc}
       >
         <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { name: "Cups", info: "Cold & hot drink cups, lids available." },
-            { name: "Plates & bowls", info: "Disposable plates and bowls for daily use." },
-            { name: "Containers", info: "Food containers for takeaway & delivery." },
-            { name: "Aluminum trays", info: "Heat-friendly trays and foil options." },
-            { name: "Cutlery", info: "Disposable spoons, forks and knives." },
-            { name: "Packaging", info: "Simple packaging solutions for shops." },
-          ].map((p, i) => (
+          {dict.products.items.map((p: any, i: number) => (
             <motion.div
-              key={p.name}
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -315,14 +305,49 @@ export default function Page() {
               <p className="mt-3 text-sm text-muted-foreground">{p.info}</p>
               <div className="mt-5 flex gap-2 text-xs font-medium text-muted-foreground/80">
                 <span className="rounded-full bg-secondary px-2.5 py-0.5">
-                  Bulk
+                  {dict.products.badges.bulk}
                 </span>
                 <span className="rounded-full bg-secondary px-2.5 py-0.5">
-                  Quick order
+                   {dict.products.badges.quick}
                 </span>
               </div>
             </motion.div>
           ))}
+        </div>
+      </Section>
+
+      {/* ABOUT */}
+      <div id="about" className="h-px" />
+      <Section
+        eyebrow="About"
+        title="Local supply for Quetta."
+        desc="From Hazara Town to Mari Abad — we support shops, vendors and families with clean disposable solutions."
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              We supply high-quality disposable tableware for Quetta. Our goal is simple:
+              <span className="font-medium text-foreground"> clean, affordable, convenient.</span>
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <Pill>Shops</Pill>
+              <Pill>Events</Pill>
+              <Pill>Families</Pill>
+            </div>
+          </div>
+          <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+                <MapPin className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="font-semibold text-foreground">Service area</p>
+                <p className="mt-2 text-muted-foreground">
+                  Main Kirani Road, Hussain Abad, Hazara Town, Quetta
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -379,7 +404,7 @@ export default function Page() {
           </div>
 
           <footer className="mt-16 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Dispotraders. All rights reserved.
+             © {new Date().getFullYear()} {dict.footer.copyright}
           </footer>
         </div>
       </section>

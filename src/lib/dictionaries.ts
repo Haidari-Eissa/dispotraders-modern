@@ -1,5 +1,13 @@
 export const dictionaries = {
   en: {
+    navigation: {
+      why: "Why",
+      products: "Products",
+      about: "About",
+      contact: "Contact",
+      get_offer: "Get offer",
+      whatsapp: "WhatsApp",
+    },
     hero: {
       pill_delivery: "Fast delivery in Quetta",
       pill_hygiene: "Clean & hygienic",
@@ -32,14 +40,42 @@ export const dictionaries = {
       card_4_title: "Affordable pricing",
       card_4_desc: "Good value for daily use and bulk orders.",
     },
+    products: {
+      eyebrow: "Products",
+      title: "Best sellers",
+      desc: "Start with these. Later you can add real products + pictures.",
+      items: [
+        { name: "Cups", info: "Cold & hot drink cups, lids available." },
+        { name: "Plates & bowls", info: "Disposable plates and bowls for daily use." },
+        { name: "Containers", info: "Food containers for takeaway & delivery." },
+        { name: "Aluminum trays", info: "Heat-friendly trays and foil options." },
+        { name: "Cutlery", info: "Disposable spoons, forks and knives." },
+        { name: "Packaging", info: "Simple packaging solutions for shops." },
+      ],
+      badges: {
+        bulk: "Bulk",
+        quick: "Quick order"
+      }
+    },
     contact: {
       eyebrow: "Contact",
       title: "Get a quick offer today.",
       desc: "Tell us what you need (cups, plates, containers). We answer fast.",
       btn_call: "Call",
+    },
+    footer: {
+      copyright: "Dispotraders. All rights reserved."
     }
   },
   ur: {
+    navigation: {
+      why: "خصوصیات",
+      products: "مصنوعات",
+      about: "ہمارے بارے میں",
+      contact: "رابطہ",
+      get_offer: "آفر حاصل کریں",
+      whatsapp: "واٹس ایپ",
+    },
     hero: {
       pill_delivery: "کوئٹہ میں تیز ترین ترسیل",
       pill_hygiene: "صاف اور شفاف",
@@ -72,11 +108,31 @@ export const dictionaries = {
       card_4_title: "مناسب قیمت",
       card_4_desc: "روزانہ استعمال اور بلک آرڈرز کے لیے بہترین قیمت۔",
     },
+    products: {
+      eyebrow: "مصنوعات",
+      title: "سب سے زیادہ فروخت",
+      desc: "ان کے ساتھ شروع کریں۔ بعد میں آپ مزید مصنوعات اور تصاویر شامل کر سکتے ہیں۔",
+      items: [
+        { name: "کپ", info: "ٹھنڈے اور گرم مشروبات کے کپ، ڈھکن دستیاب ہیں۔" },
+        { name: "پلیٹیں اور پیالے", info: "روزانہ استعمال کے لیے ڈسپوزایبل پلیٹیں اور پیالے۔" },
+        { name: "کنٹینرز", info: "کھانے کے پارسل اور ڈلیوری کے لیے کنٹینرز۔" },
+        { name: "ایلومینیم ٹرے", info: "کھانا گرم رکھنے والی ٹرے اور فوائل۔" },
+        { name: "چمچ اور کانٹے", info: "ڈسپوزایبل چمچ، کانٹے اور چھری۔" },
+        { name: "پیکیجنگ", info: "دکانوں کے لیے سادہ پیکیجنگ کا سامان۔" },
+      ],
+      badges: {
+        bulk: "تھوک",
+        quick: "فوری آرڈر"
+      }
+    },
     contact: {
       eyebrow: "رابطہ کریں",
       title: "آج ہی آفر حاصل کریں۔",
       desc: "ہمیں بتائیں کہ آپ کو کیا ضرورت ہے (کپ، پلیٹیں، کنٹینرز)۔ ہم فوری جواب دیتے ہیں۔",
       btn_call: "کال کریں",
+    },
+    footer: {
+      copyright: "ڈسپو ٹریڈرز۔ جملہ حقوق محفوظ ہیں۔"
     }
   }
 };
