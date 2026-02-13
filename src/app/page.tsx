@@ -105,11 +105,9 @@ export default function Page() {
   const heroY = useTransform(scrollY, [0, 400], [0, 60]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-  // --- MAGIC: Detect Language & Load Dictionary ---
   const pathname = usePathname();
   const lang = pathname?.includes('/ur') ? 'ur' : 'en';
   const dict = getDictionary(lang);
-  // ------------------------------------------------
 
   const phone = "+123 456 7890";
   const whatsapp = "https://wa.me/1234567890";
@@ -134,7 +132,6 @@ export default function Page() {
             <span className="font-bold tracking-tight text-foreground">Dispotraders</span>
           </div>
 
-          {/* TRANSLATED NAVIGATION */}
           <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
             <a className="transition-colors hover:text-foreground" href="#why">{dict.navigation.why}</a>
             <a className="transition-colors hover:text-foreground" href="#products">{dict.navigation.products}</a>
@@ -222,7 +219,7 @@ export default function Page() {
             </motion.div>
           </motion.div>
 
-          {/* Floating highlight cards (TRANSLATED) */}
+          {/* Floating highlight cards */}
           <div className="mt-20 grid gap-6 sm:grid-cols-3">
             {[
               { t: dict.features.hygiene_title, d: dict.features.hygiene_desc, i: <ShieldCheck className="h-5 w-5" /> },
@@ -250,7 +247,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* WHY (TRANSLATED) */}
+      {/* WHY */}
       <div id="why" className="h-px" />
       <Section
         eyebrow={dict.why.eyebrow}
@@ -281,7 +278,7 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* PRODUCTS (FULLY TRANSLATED via dictionary loop) */}
+      {/* PRODUCTS */}
       <div id="products" className="h-px" />
       <Section
         eyebrow={dict.products.eyebrow}
@@ -316,23 +313,23 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* ABOUT */}
+      {/* ABOUT (FIXED) */}
       <div id="about" className="h-px" />
       <Section
-        eyebrow="About"
-        title="Local supply for Quetta."
-        desc="From Hazara Town to Mari Abad — we support shops, vendors and families with clean disposable solutions."
+        eyebrow={dict.about.eyebrow}
+        title={dict.about.title}
+        desc={dict.about.desc}
       >
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
             <p className="text-lg leading-relaxed text-muted-foreground">
-              We supply high-quality disposable tableware for Quetta. Our goal is simple:
-              <span className="font-medium text-foreground"> clean, affordable, convenient.</span>
+              {dict.about.mission_text}
+              <span className="font-medium text-foreground">{dict.about.mission_highlight}</span>
             </p>
             <div className="mt-8 flex flex-wrap gap-2">
-              <Pill>Shops</Pill>
-              <Pill>Events</Pill>
-              <Pill>Families</Pill>
+              <Pill>{dict.about.pills.shops}</Pill>
+              <Pill>{dict.about.pills.events}</Pill>
+              <Pill>{dict.about.pills.families}</Pill>
             </div>
           </div>
           <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
@@ -341,9 +338,9 @@ export default function Page() {
                 <MapPin className="h-6 w-6" />
               </div>
               <div>
-                <p className="font-semibold text-foreground">Service area</p>
+                <p className="font-semibold text-foreground">{dict.about.service_title}</p>
                 <p className="mt-2 text-muted-foreground">
-                  Main Kirani Road, Hussain Abad, Hazara Town, Quetta
+                  {dict.about.service_desc}
                 </p>
               </div>
             </div>
@@ -351,7 +348,7 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* CONTACT (TRANSLATED) */}
+      {/* CONTACT */}
       <div id="contact" className="h-px" />
       <section className="relative py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

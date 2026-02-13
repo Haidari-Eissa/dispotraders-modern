@@ -57,6 +57,20 @@ export const dictionaries = {
         quick: "Quick order"
       }
     },
+    about: {
+      eyebrow: "About",
+      title: "Local supply for Quetta.",
+      desc: "From Hazara Town to Mari Abad — we support shops, vendors and families with clean disposable solutions.",
+      mission_text: "We supply high-quality disposable tableware for Quetta. Our goal is simple:",
+      mission_highlight: " clean, affordable, convenient.",
+      pills: {
+        shops: "Shops",
+        events: "Events",
+        families: "Families"
+      },
+      service_title: "Service area",
+      service_desc: "Main Kirani Road, Hussain Abad, Hazara Town, Quetta"
+    },
     contact: {
       eyebrow: "Contact",
       title: "Get a quick offer today.",
@@ -124,6 +138,20 @@ export const dictionaries = {
         bulk: "تھوک",
         quick: "فوری آرڈر"
       }
+    },
+    about: {
+      eyebrow: "ہمارے بارے میں",
+      title: "کوئٹہ کے لیے لوکل سپلائی۔",
+      desc: "ہزارہ ٹاؤن سے مری آباد تک — ہم دکانوں، وینڈرز اور خاندانوں کو صاف ستھرا ڈسپوزایبل سامان فراہم کرتے ہیں۔",
+      mission_text: "ہم کوئٹہ کے لیے اعلیٰ معیار کے ڈسپوزایبل برتن فراہم کرتے ہیں۔ ہمارا مقصد سادہ ہے:",
+      mission_highlight: " صاف، سستا، آسان۔",
+      pills: {
+        shops: "دکانیں",
+        events: "تقریبات",
+        families: "خاندان"
+      },
+      service_title: "سروس ایریا",
+      service_desc: "مین کیرانی روڈ، حسین آباد، ہزارہ ٹاؤن، کوئٹہ"
     },
     contact: {
       eyebrow: "رابطہ کریں",
