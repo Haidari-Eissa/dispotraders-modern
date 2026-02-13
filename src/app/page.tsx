@@ -12,8 +12,8 @@ import {
   Timer,
 } from "lucide-react";
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { usePathname } from 'next/navigation'; // <--- 1. To detect language
-import { getDictionary } from '@/lib/dictionaries'; // <--- 2. To get translations
+import { usePathname } from 'next/navigation';
+import { getDictionary } from '@/lib/dictionaries';
 
 /**
  * LAZY FIX: Keep ': any' to prevent TypeScript strict errors.
@@ -145,7 +145,8 @@ export default function Page() {
           </div>
 
           <div className="flex items-center gap-3">
-             <div className="hidden sm:block">
+             {/* --- FIX: Removed 'hidden sm:block' so it shows on mobile --- */}
+             <div className="block">
                 <LanguageSwitcher />
              </div>
              

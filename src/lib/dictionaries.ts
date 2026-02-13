@@ -82,7 +82,6 @@ export const dictionaries = {
 };
 
 export const getDictionary = (lang: string) => {
-  // Default to English if lang is not found
   if (lang === 'ur') return dictionaries.ur;
   return dictionaries.en;
 };
