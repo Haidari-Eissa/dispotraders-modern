@@ -12,10 +12,11 @@ import {
   Timer,
 } from "lucide-react";
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { usePathname } from 'next/navigation'; // <--- 1. To detect language
+import { getDictionary } from '@/lib/dictionaries'; // <--- 2. To get translations
 
 /**
- * LAZY FIX: We added ': any' here.
- * This stops the "Type error" that was breaking your Vercel build.
+ * LAZY FIX: Keep ': any' to prevent TypeScript strict errors.
  */
 const fadeUp: any = {
   hidden: { opacity: 0, y: 20 },
@@ -107,6 +108,12 @@ export default function Page() {
   const heroY = useTransform(scrollY, [0, 400], [0, 60]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
+  // --- MAGIC: Detect Language & Load Dictionary ---
+  const pathname = usePathname();
+  const lang = pathname?.includes('/ur') ? 'ur' : 'en';
+  const dict = getDictionary(lang);
+  // ------------------------------------------------
+
   const phone = "+123 456 7890";
   const whatsapp = "https://wa.me/1234567890";
 
@@ -168,9 +175,9 @@ export default function Page() {
               variants={fadeUp}
               className="mb-6 inline-flex flex-wrap items-center gap-2"
             >
-              <Pill>Fast delivery in Quetta</Pill>
-              <Pill>Clean & hygienic</Pill>
-              <Pill>Affordable prices</Pill>
+              <Pill>{dict.hero.pill_delivery}</Pill>
+              <Pill>{dict.hero.pill_hygiene}</Pill>
+              <Pill>{dict.hero.pill_price}</Pill>
             </motion.div>
 
             <motion.h1
@@ -180,9 +187,9 @@ export default function Page() {
               variants={fadeUp}
               className="text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
             >
-              Disposable tableware that looks clean,
-              <span className="text-muted-foreground"> works fast </span>
-              and saves time.
+              {dict.hero.title_start}{" "}
+              <span className="text-muted-foreground"> {dict.hero.title_highlight} </span>
+              {" "}{dict.hero.title_end}
             </motion.h1>
 
             <motion.p
@@ -192,8 +199,7 @@ export default function Page() {
               variants={fadeUp}
               className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl"
             >
-              Cups, plates, containers, packaging and more — for shops, events and families.
-              Simple ordering, quick response, reliable supply in Quetta (Hazara Town to Mari Abad).
+              {dict.hero.description}
             </motion.p>
 
             <motion.div
@@ -207,26 +213,26 @@ export default function Page() {
                 href="#products"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
               >
-                View products <ArrowRight className="h-4 w-4" />
+                {dict.hero.btn_products} <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={whatsapp}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-secondary-foreground/10"
               >
-                WhatsApp order <Phone className="h-4 w-4" />
+                {dict.hero.btn_whatsapp} <Phone className="h-4 w-4" />
               </a>
             </motion.div>
           </motion.div>
 
-          {/* Floating highlight cards */}
+          {/* Floating highlight cards (TRANSLATED) */}
           <div className="mt-20 grid gap-6 sm:grid-cols-3">
             {[
-              { t: "Hygienic supply", d: "Packed & ready to use — clean service for your customers.", i: <ShieldCheck className="h-5 w-5" /> },
-              { t: "Quick response", d: "Fast replies and simple ordering via WhatsApp or call.", i: <Timer className="h-5 w-5" /> },
-              { t: "Bulk friendly", d: "Events, shops and families — we handle small to bulk orders.", i: <Package className="h-5 w-5" /> },
+              { t: dict.features.hygiene_title, d: dict.features.hygiene_desc, i: <ShieldCheck className="h-5 w-5" /> },
+              { t: dict.features.response_title, d: dict.features.response_desc, i: <Timer className="h-5 w-5" /> },
+              { t: dict.features.bulk_title, d: dict.features.bulk_desc, i: <Package className="h-5 w-5" /> },
             ].map((x, i) => (
               <motion.div
-                key={x.t}
+                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -246,42 +252,42 @@ export default function Page() {
         </div>
       </section>
 
-      {/* WHY */}
+      {/* WHY (TRANSLATED) */}
       <div id="why" className="h-px" />
       <Section
-        eyebrow="Why Dispotraders"
-        title="Simple, clean, reliable."
-        desc="A modern supplier mindset: fast delivery, consistent quality, easy ordering."
+        eyebrow={dict.why.eyebrow}
+        title={dict.why.title}
+        desc={dict.why.desc}
       >
         <div className="grid gap-6 md:grid-cols-2">
           <Card
             icon={<ShieldCheck className="h-6 w-6" />}
-            title="Hygienic & safe"
-            text="Disposable tableware helps you serve cleanly — perfect for shops, street food and events."
+            title={dict.why.card_1_title}
+            text={dict.why.card_1_desc}
           />
           <Card
             icon={<Timer className="h-6 w-6" />}
-            title="Save time"
-            text="No washing, no stress. Use and move on — focus on your business."
+            title={dict.why.card_2_title}
+            text={dict.why.card_2_desc}
           />
           <Card
             icon={<Package className="h-6 w-6" />}
-            title="Product range"
-            text="Plastic and aluminum options — cups, plates, containers, packaging."
+            title={dict.why.card_3_title}
+            text={dict.why.card_3_desc}
           />
           <Card
             icon={<Check className="h-6 w-6" />}
-            title="Affordable pricing"
-            text="Good value for daily use and bulk orders."
+            title={dict.why.card_4_title}
+            text={dict.why.card_4_desc}
           />
         </div>
       </Section>
 
-      {/* PRODUCTS */}
+      {/* PRODUCTS (KEPT STATIC FOR NOW, or map if you add them to dict later) */}
       <div id="products" className="h-px" />
       <Section
         eyebrow="Products"
-        title="Best sellers (editable)"
+        title="Best sellers"
         desc="Start with these. Later you can add real products + pictures."
       >
         <div className="grid gap-6 md:grid-cols-3">
@@ -319,42 +325,7 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* ABOUT */}
-      <div id="about" className="h-px" />
-      <Section
-        eyebrow="About"
-        title="Local supply for Quetta."
-        desc="From Hazara Town to Mari Abad — we support shops, vendors and families with clean disposable solutions."
-      >
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              We supply high-quality disposable tableware for Quetta. Our goal is simple:
-              <span className="font-medium text-foreground"> clean, affordable, convenient.</span>
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <Pill>Shops</Pill>
-              <Pill>Events</Pill>
-              <Pill>Families</Pill>
-            </div>
-          </div>
-          <div className="rounded-3xl border border-border bg-card p-8 lg:p-10">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
-                <MapPin className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="font-semibold text-foreground">Service area</p>
-                <p className="mt-2 text-muted-foreground">
-                  Main Kirani Road, Hussain Abad, Hazara Town, Quetta
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* CONTACT */}
+      {/* CONTACT (TRANSLATED) */}
       <div id="contact" className="h-px" />
       <section className="relative py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -363,13 +334,13 @@ export default function Page() {
               <div className="p-10 sm:p-16">
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground">
                   <Phone className="h-3.5 w-3.5" />
-                  Contact
+                  {dict.contact.eyebrow}
                 </div>
                 <h3 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  Get a quick offer today.
+                  {dict.contact.title}
                 </h3>
                 <p className="mt-4 text-lg text-muted-foreground">
-                  Tell us what you need (cups, plates, containers). We answer fast.
+                  {dict.contact.desc}
                 </p>
 
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -383,11 +354,12 @@ export default function Page() {
                     href={`tel:${phone.replace(/\s/g, "")}`}
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary"
                   >
-                    Call {phone}
+                    {dict.contact.btn_call} {phone}
                   </a>
                 </div>
               </div>
 
+              {/* Map remains the same */}
               <div className="relative min-h-[300px] border-t border-border bg-secondary/20 md:border-t-0 md:border-l">
                 <div className="absolute inset-0 p-6">
                   <div className="h-full w-full overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
