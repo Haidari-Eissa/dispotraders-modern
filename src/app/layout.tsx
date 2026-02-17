@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";  // <--- THIS IS THE CRITICAL LINE
+import { Inter, Noto_Nastaliq_Urdu } from "next/font/google"; // <--- Imported Noto
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+// <--- Configure the Urdu Font
+const urduFont = Noto_Nastaliq_Urdu({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-urdu",
 });
 
 export const metadata: Metadata = {
@@ -19,9 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} antialiased bg-slate-950 text-white`}>
+      {/* Add both variables to the body class list */}
+      <body className={`${inter.variable} ${urduFont.variable} antialiased bg-slate-950 text-white`}>
         {children}
       </body>
     </html>
   );
-}
+} 
