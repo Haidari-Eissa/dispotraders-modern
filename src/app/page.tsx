@@ -295,6 +295,11 @@ export default function Page() {
               transition={{ delay: i * 0.05, duration: 0.5 }}
               className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/20 hover:shadow-md"
             >
+              {p.image && (
+                <div className="aspect-video overflow-hidden rounded-lg border border-border mb-4">
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                </div>
+              )}
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold text-foreground">{p.name}</p>
                 <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
