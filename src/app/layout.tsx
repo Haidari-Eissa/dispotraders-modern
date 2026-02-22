@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Noto_Nastaliq_Urdu } from "next/font/google"; // <--- Imported Noto
 import "./globals.css";
 
@@ -26,6 +27,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/@react-grab/mcp/dist/client.global.js"
+            strategy="lazyOnload"
+          />
+        )}
+      </head>
       {/* Add both variables to the body class list */}
       <body className={`${inter.variable} ${urduFont.variable} antialiased bg-slate-950 text-white`}>
         {children}
