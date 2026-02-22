@@ -46,26 +46,45 @@ export default function LanguageSwitcher() {
 
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <button onClick={() => setIsOpen(!isOpen)} className="flex items-center justify-center bg-gray-800/50 p-2 rounded-lg border border-gray-700">
-        <Image src="/globe.svg" alt="Language" width={20} height={20} />
-      </button>
-      {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-32 bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-lg shadow-lg">
-          <button
-            onClick={() => handleSwitch('en')}
-            className={`block w-full text-left px-4 py-2 text-sm ${!pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => handleSwitch('ur')}
-            className={`block w-full text-left px-4 py-2 text-sm ${pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
-          >
-            اردو
-          </button>
-        </div>
-      )}
+    <div>
+      {/* Dropdown for mobile */}
+      <div className="relative md:hidden" ref={dropdownRef}>
+        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center justify-center bg-gray-800/50 p-2 rounded-lg border border-gray-700">
+          <Image src="/globe.svg" alt="Language" width={20} height={20} />
+        </button>
+        {isOpen && (
+          <div className="absolute top-full right-0 mt-2 w-32 bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-lg shadow-lg">
+            <button
+              onClick={() => handleSwitch('en')}
+              className={`block w-full text-left px-4 py-2 text-sm ${!pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => handleSwitch('ur')}
+              className={`block w-full text-left px-4 py-2 text-sm ${pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
+            >
+              اردو
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Buttons for larger screens */}
+      <div className="hidden md:flex gap-2 text-sm font-bold bg-gray-800/50 p-2 rounded-lg border border-gray-700">
+        <button 
+          onClick={() => handleSwitch('en')} 
+          className={`px-2 py-1 rounded ${!pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
+        >
+          EN
+        </button>
+        <button 
+          onClick={() => handleSwitch('ur')} 
+          className={`px-2 py-1 rounded ${pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
+        >
+          اردو
+        </button>
+      </div>
     </div>
   );
 }
