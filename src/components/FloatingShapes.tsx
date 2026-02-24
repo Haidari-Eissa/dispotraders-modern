@@ -3,20 +3,15 @@ import { motion } from "framer-motion";
 
 export function FloatingShapes() {
   const shapes = [
-    // Plastic Cups
-    { icon: "🥤", size: "text-4xl", x: "10vw", y: "20vh", rotate: -15, duration: 20 },
-    { icon: "🥤", size: "text-5xl", x: "80vw", y: "30vh", rotate: 10, duration: 25 },
-    { icon: "🥤", size: "text-3xl", x: "30vw", y: "70vh", rotate: 5, duration: 18 },
-
-    // Forks
-    { icon: "🍴", size: "text-4xl", x: "20vw", y: "50vh", rotate: 20, duration: 22 },
-    { icon: "🍴", size: "text-5xl", x: "70vw", y: "80vh", rotate: -5, duration: 30 },
-    { icon: "🍴", size: "text-3xl", x: "50vw", y: "10vh", rotate: -10, duration: 15 },
-
-    // One-way Plates
-    { icon: "🍽️", size: "text-5xl", x: "90vw", y: "60vh", rotate: 15, duration: 28 },
-    { icon: "🍽️", size: "text-4xl", x: "5vw", y: "80vh", rotate: -20, duration: 23 },
-    { icon: "🍽️", size: "text-6xl", x: "40vw", y: "40vh", rotate: 0, duration: 19 },
+    // Keep movement subtle but visible, and very slow for low CPU/GPU load.
+    { icon: "🥤", size: "text-4xl", left: "10vw", top: "20vh", rotate: -15, dx: 18, dy: -22, duration: 56, delay: 0 },
+    { icon: "🥤", size: "text-5xl", left: "80vw", top: "30vh", rotate: 10, dx: -14, dy: 20, duration: 68, delay: 4 },
+    { icon: "🥤", size: "text-3xl", left: "30vw", top: "70vh", rotate: 5, dx: 16, dy: -16, duration: 60, delay: 9 },
+    { icon: "🍴", size: "text-4xl", left: "20vw", top: "50vh", rotate: 20, dx: -20, dy: 14, duration: 72, delay: 2 },
+    { icon: "🍴", size: "text-5xl", left: "70vw", top: "80vh", rotate: -5, dx: 12, dy: -18, duration: 84, delay: 7 },
+    { icon: "🍽️", size: "text-5xl", left: "90vw", top: "60vh", rotate: 15, dx: -16, dy: -14, duration: 76, delay: 5 },
+    { icon: "🍽️", size: "text-4xl", left: "5vw", top: "80vh", rotate: -20, dx: 14, dy: 18, duration: 80, delay: 10 },
+    { icon: "🍽️", size: "text-6xl", left: "42vw", top: "40vh", rotate: 0, dx: -12, dy: 16, duration: 88, delay: 1 },
   ];
 
   return (
@@ -24,17 +19,19 @@ export function FloatingShapes() {
       {shapes.map((shape, i) => (
         <motion.div
           key={i}
-          className={`absolute ${shape.size} opacity-5`}
-          initial={{ x: shape.x, y: shape.y, rotate: shape.rotate }}
+          className={`absolute ${shape.size} opacity-10 will-change-transform`}
+          style={{ left: shape.left, top: shape.top }}
+          initial={{ x: 0, y: 0, rotate: shape.rotate }}
           animate={{
-            y: [shape.y, `calc(${shape.y} - 20px)`, shape.y],
-            x: [shape.x, `calc(${shape.x} + 15px)`, shape.x],
-            rotate: [shape.rotate, shape.rotate + 5, shape.rotate],
+            x: [0, shape.dx, 0, -shape.dx * 0.6, 0],
+            y: [0, shape.dy, 0, -shape.dy * 0.5, 0],
+            rotate: [shape.rotate, shape.rotate + 3, shape.rotate - 2, shape.rotate],
           }}
           transition={{
             duration: shape.duration,
+            delay: shape.delay,
             repeat: Infinity,
-            repeatType: "mirror",
+            repeatType: "loop",
             ease: "easeInOut",
           }}
         >
