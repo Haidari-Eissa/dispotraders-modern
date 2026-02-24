@@ -14,6 +14,7 @@ import {
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary } from '@/lib/dictionaries';
+import { FloatingShapes } from "@/components/FloatingShapes";
 
 const fadeUp: any = {
   hidden: { opacity: 0, y: 20 },
@@ -114,6 +115,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/10">
+      <FloatingShapes />
       {/* Background Gradients */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute -top-[20%] left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />

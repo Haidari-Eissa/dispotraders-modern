@@ -14,8 +14,8 @@ export default function Header() {
         <div className="flex items-center gap-6">
           <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-300">
             <Link href="/" className="hover:text-white transition">Home</Link>
-            <Link href="/about" className="hover:text-white transition">About</Link>
-            <Link href="/contact" className="hover:text-white transition">Contact</Link>
+            <Link href="#about" className="hover:text-white transition">About</Link>
+            <Link href="#contact" className="hover:text-white transition">Contact</Link>
           </nav>
           
           {/* This is where we plug in your new component */}
