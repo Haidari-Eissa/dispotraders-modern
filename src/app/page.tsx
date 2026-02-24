@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
   ArrowRight,
   Check,
@@ -13,10 +13,10 @@ import {
 } from "lucide-react";
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
-import { getDictionary } from '@/lib/dictionaries';
+import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
 import { FloatingShapes } from "@/components/FloatingShapes";
 
-const fadeUp: any = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i = 0) => ({
     opacity: 1,
@@ -107,8 +107,9 @@ export default function Page() {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const pathname = usePathname();
-  const lang = pathname?.includes('/ur') ? 'ur' : 'en';
+  const lang: LanguageCode = pathname?.includes('/ur') ? 'ur' : 'en';
   const dict = getDictionary(lang);
+  type ProductItem = Dictionary["products"]["items"][number];
 
   const phone = "+123 456 7890";
   const whatsapp = "https://wa.me/1234567890";
@@ -288,7 +289,7 @@ export default function Page() {
         desc={dict.products.desc}
       >
         <div className="grid gap-6 md:grid-cols-3">
-          {dict.products.items.map((p: any, i: number) => (
+          {dict.products.items.map((p: ProductItem, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}

@@ -165,7 +165,10 @@ export const dictionaries = {
   }
 };
 
-export const getDictionary = (lang: string) => {
+export type LanguageCode = keyof typeof dictionaries;
+export type Dictionary = (typeof dictionaries)[LanguageCode];
+
+export const getDictionary = (lang: LanguageCode): Dictionary => {
   if (lang === 'ur') return dictionaries.ur;
   return dictionaries.en;
 };
