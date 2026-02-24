@@ -1,6 +1,5 @@
 "use client";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 
 export function FloatingShapes() {
   const shapes = useMemo(
@@ -17,59 +16,16 @@ export function FloatingShapes() {
     ],
     []
   );
-  const { scrollY } = useScroll();
-  const [parallaxShift, setParallaxShift] = useState(0);
-  const stopTimerRef = useRef<number | null>(null);
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const prev = scrollY.getPrevious() ?? latest;
-    const diff = latest - prev;
-
-    if (Math.abs(diff) < 0.4) return;
-
-    // Positive diff = scrolling down. Keep shifts subtle and bounded.
-    const nextShift = Math.max(-12, Math.min(12, diff * 0.7));
-    setParallaxShift(nextShift);
-
-    if (stopTimerRef.current) {
-      window.clearTimeout(stopTimerRef.current);
-    }
-    stopTimerRef.current = window.setTimeout(() => {
-      setParallaxShift(0);
-    }, 120);
-  });
-
-  useEffect(() => {
-    return () => {
-      if (stopTimerRef.current) {
-        window.clearTimeout(stopTimerRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {shapes.map((shape, i) => (
-        <motion.div
+        <div
           key={i}
           className={`absolute ${shape.size} opacity-10 will-change-transform`}
-          style={{ left: shape.left, top: shape.top }}
-          initial={{ x: 0, y: 0, rotate: shape.rotate }}
-          animate={{
-            x: (i % 2 === 0 ? 1 : -1) * parallaxShift * 0.35,
-            y: -parallaxShift * (0.45 + (i % 3) * 0.1),
-            rotate: shape.rotate + (i % 2 === 0 ? 1 : -1) * parallaxShift * 0.08,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 55,
-            damping: 22,
-            mass: 0.65,
-            delay: shape.delay * 0.01,
-          }}
+          style={{ left: shape.left, top: shape.top, transform: `rotate(${shape.rotate}deg)` }}
         >
           {shape.icon}
-        </motion.div>
+        </div>
       ))}
     </div>
   );
