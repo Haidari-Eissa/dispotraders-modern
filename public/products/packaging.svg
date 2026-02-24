@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g transform="translate(280 200)" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="6">
+    <rect x="30" y="130" width="220" height="180" rx="14"/>
+    <path d="M30 130 L140 60 L250 130 Z" fill="#e2e8f0"/>
+    <rect x="290" y="80" width="290" height="230" rx="16"/>
+    <path d="M290 80 L435 0 L580 80 Z" fill="#dbeafe"/>
+    <rect x="340" y="140" width="60" height="70" rx="10" fill="#bfdbfe" stroke="none"/>
+  </g>
+  <text x="60" y="740" fill="#f3f4f6" font-size="56" font-family="Arial, sans-serif" font-weight="700">PACKAGING</text>
+</svg>
