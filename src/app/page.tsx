@@ -4,13 +4,16 @@ import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
   ArrowRight,
   Check,
+  Menu,
   MapPin,
   Package,
   Phone,
   ShieldCheck,
   Sparkles,
   Timer,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
@@ -101,10 +104,27 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
+function BrandLogo() {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-white/15 bg-gradient-to-br from-cyan-300 via-sky-400 to-blue-600 shadow-[0_8px_30px_-12px_rgba(56,189,248,0.9)]">
+        <div className="absolute -left-1 top-1 h-4 w-4 rounded-full bg-white/65 blur-[1px]" />
+        <div className="absolute -right-2 -bottom-2 h-7 w-7 rounded-full bg-black/20" />
+        <div className="absolute left-2.5 top-2.5 h-5 w-5 rounded-md border border-white/65" />
+      </div>
+      <div className="leading-tight">
+        <p className="text-sm font-semibold tracking-[0.18em] text-muted-foreground">DISPO</p>
+        <p className="text-base font-bold tracking-tight text-foreground">TRADERS</p>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 400], [0, 60]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
   const lang: LanguageCode = pathname?.includes('/ur') ? 'ur' : 'en';
@@ -127,39 +147,57 @@ export default function Page() {
 
       {/* Sticky Nav */}
       <div className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Package className="h-5 w-5" />
+        <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
+          <div className="flex items-center justify-between">
+            <BrandLogo />
+
+            <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
+              <a className="transition-colors hover:text-foreground" href="#why">{dict.navigation.why}</a>
+              <a className="transition-colors hover:text-foreground" href="#products">{dict.navigation.products}</a>
+              <a className="transition-colors hover:text-foreground" href="#about">{dict.navigation.about}</a>
+              <a className="transition-colors hover:text-foreground" href="#contact">{dict.navigation.contact}</a>
             </div>
-            <span className="font-bold tracking-tight text-foreground">Dispotraders</span>
-          </div>
 
-          <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
-            <a className="transition-colors hover:text-foreground" href="#why">{dict.navigation.why}</a>
-            <a className="transition-colors hover:text-foreground" href="#products">{dict.navigation.products}</a>
-            <a className="transition-colors hover:text-foreground" href="#about">{dict.navigation.about}</a>
-            <a className="transition-colors hover:text-foreground" href="#contact">{dict.navigation.contact}</a>
-          </div>
-
-          <div className="flex items-center gap-3">
-             <div className="block">
+            <div className="flex items-center gap-3">
+              <div className="block">
                 <LanguageSwitcher />
-             </div>
-             
-            <a
-              href={whatsapp}
-              className="hidden rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:inline-flex"
-            >
-              {dict.navigation.whatsapp}
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
-            >
-              {dict.navigation.get_offer} <ArrowRight className="h-4 w-4" />
-            </a>
+              </div>
+
+              <a
+                href="#contact"
+                className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 sm:inline-flex"
+              >
+                {dict.navigation.get_offer} <ArrowRight className="h-4 w-4" />
+              </a>
+              <button
+                type="button"
+                aria-label="Toggle menu"
+                aria-expanded={mobileMenuOpen}
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary/50 text-foreground transition-colors hover:bg-secondary md:hidden"
+              >
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           </div>
+
+          {mobileMenuOpen ? (
+            <div className="mt-4 rounded-2xl border border-border bg-card/95 p-3 shadow-lg backdrop-blur md:hidden">
+              <div className="grid gap-1 text-sm font-medium text-muted-foreground">
+                <a className="rounded-lg px-3 py-2 transition-colors hover:bg-secondary hover:text-foreground" href="#why" onClick={() => setMobileMenuOpen(false)}>{dict.navigation.why}</a>
+                <a className="rounded-lg px-3 py-2 transition-colors hover:bg-secondary hover:text-foreground" href="#products" onClick={() => setMobileMenuOpen(false)}>{dict.navigation.products}</a>
+                <a className="rounded-lg px-3 py-2 transition-colors hover:bg-secondary hover:text-foreground" href="#about" onClick={() => setMobileMenuOpen(false)}>{dict.navigation.about}</a>
+                <a className="rounded-lg px-3 py-2 transition-colors hover:bg-secondary hover:text-foreground" href="#contact" onClick={() => setMobileMenuOpen(false)}>{dict.navigation.contact}</a>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                >
+                  {dict.navigation.get_offer} <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
 
