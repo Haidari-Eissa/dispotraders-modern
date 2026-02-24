@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowRight,
   Check,
@@ -338,7 +339,14 @@ export default function Page() {
             >
               {p.image && (
                 <div className="aspect-video overflow-hidden rounded-lg border border-border mb-4">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={640}
+                    height={360}
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
                 </div>
               )}
               <div className="flex items-center justify-between">

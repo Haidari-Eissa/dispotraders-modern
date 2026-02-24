@@ -1,6 +1,4 @@
-import type { NextRequest } from "next/server";
-
-export function middleware(request: NextRequest) {
+export function middleware() {
   // This middleware is temporarily disabled to restore single-language functionality.
   // Internationalization routing can be re-enabled here when ready.
 }
