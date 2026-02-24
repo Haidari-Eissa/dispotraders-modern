@@ -1,0 +1,53 @@
+[33ma65fcd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m update
+[33m7b81b0d[m update
+[33mff67b28[m update
+[33m321c898[m update
+[33m57232f3[m update
+[33mef17a1c[m update
+[33m858a588[m update
+[33m4687fa1[m update
+[33m9994d34[m update
+[33m7aa18c2[m Force fix
+[33mbf52099[m update
+[33mf245012[m update
+[33m45c4a1a[m update
+[33md28a2d5[m update
+[33m947e1aa[m update
+[33mfcd5204[m update
+[33m7428231[m update
+[33mde8fd67[m update
+[33mb9838fd[m update
+[33md2495cf[m update
+[33m721ee5c[m update
+[33m2647948[m update
+[33m989fbb4[m update
+[33m5605b97[m update
+[33mf1ee679[m update
+[33m300afd2[m update
+[33m02859d4[m update
+[33m7178bf4[m Language addedv3
+[33m22c93ed[m Language addedv2
+[33m3f9face[m update
+[33m27f938a[m update
+[33m79b22a0[m Fix /en page re-export path-v1
+[33mfc5d09b[m Fix /en page re-export path
+[33m6a8772b[m Stabilize app router (remove unsupported i18n config)
+[33ma19e774[m Restore page.tsx from a0de410 (stable baseline)
+[33m046d65a[m Restore page.tsx default export
+[33m83d5ada[m Fix page.tsx default export
+[33me8fe018[m Fix App Router layouts: root vs lang segment
+[33m617199c[m Fix globals.css import (root layout only)
+[33ma56176b[m Fix globals.css import path after i18n routing
+[33m666f65a[m Fix i18n routing: remove generateStaticParams from client page
+[33m28de540[m Prepare project for bilingual routing_v1 (EN/UR)
+[33mce90991[m Prepare project for bilingual routing (EN/UR)
+[33ma0de410[m BG animations opacity
+[33mccc2711[m light Background Animation
+[33mf372d3a[m Global design refresh: fonts, colors, spacing
+[33m90cccbb[m Global Desing update: fonts, color, background
+[33m6039813[m Fix Framer Motion fadeUp variants typing
+[33me23431d[m Fix Framer Motion TS easing
+[33m621d3c3[m Modern UI update
+[33m9eacce8[m Vecel-Erorr1
+[33m87c8cf8[m force vercel rebuild
+[33m53e64e6[m initial version
