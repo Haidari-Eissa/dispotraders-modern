@@ -436,16 +436,18 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Map remains the same */}
-              <div className="relative min-h-[300px] border-t border-border bg-secondary/20 md:border-t-0 md:border-l">
-                <div className="absolute inset-0 p-6">
-                  <div className="h-full w-full overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
+              <div className="relative min-h-[360px] border-t border-border bg-gradient-to-br from-secondary/40 via-background to-secondary/10 md:min-h-[520px] md:border-t-0 md:border-l">
+                <div className="absolute inset-0 p-4 sm:p-6 md:p-8">
+                  <div className="h-full w-full overflow-hidden rounded-3xl border border-border/80 bg-background shadow-lg ring-1 ring-black/5">
                     <iframe
                       title="map"
-                      src="http://googleusercontent.com/maps.google.com/maps?q=Quetta&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3449.205920230776!2d66.9619771!3d30.174111200000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ed2e1b8c4495c2b%3A0xb3d68a3f4e961621!2sDispotraders!5e0!3m2!1sde!2sch!4v1772054219745!5m2!1sde!2sch"
                       width="100%"
                       height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
                       loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
                       className="block h-full w-full"
                     />
                   </div>
