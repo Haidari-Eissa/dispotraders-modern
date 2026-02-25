@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -122,9 +122,10 @@ function BrandLogo() {
 }
 
 export default function Page() {
+  const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 400], [0, 60]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 400], [0, 24]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
@@ -136,14 +137,12 @@ export default function Page() {
   const whatsapp = "https://wa.me/1234567890";
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-primary/10">
+    <main className="relative min-h-screen overflow-x-clip bg-background text-foreground selection:bg-primary/10">
       <FloatingShapes />
-      {/* Background Gradients */}
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-[20%] left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute top-[20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-3xl" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-purple-500/5 blur-3xl" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute -top-[16%] left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full bg-primary/4 blur-3xl" />
+        <div className="absolute top-[24%] right-[-8%] h-[520px] w-[520px] rounded-full bg-cyan-500/5 blur-3xl" />
+        <div className="absolute bottom-[-12%] left-[-8%] h-[500px] w-[500px] rounded-full bg-blue-500/5 blur-3xl" />
       </div>
 
       {/* Sticky Nav */}
@@ -205,7 +204,10 @@ export default function Page() {
       {/* HERO */}
       <section className="relative z-10 pt-20 pb-16 sm:pt-32 sm:pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="max-w-3xl">
+          <motion.div
+            style={prefersReducedMotion ? undefined : { y: heroY, opacity: heroOpacity }}
+            className="max-w-3xl"
+          >
             <motion.div
               initial="hidden"
               animate="visible"
@@ -290,7 +292,7 @@ export default function Page() {
       </section>
 
       {/* WHY */}
-      <div id="why" className="h-px" />
+      <div id="why" className="h-px scroll-mt-28" />
       <Section
         eyebrow={dict.why.eyebrow}
         title={dict.why.title}
@@ -321,7 +323,7 @@ export default function Page() {
       </Section>
 
       {/* PRODUCTS */}
-      <div id="products" className="h-px" />
+      <div id="products" className="h-px scroll-mt-28" />
       <Section
         eyebrow={dict.products.eyebrow}
         title={dict.products.title}
@@ -368,7 +370,7 @@ export default function Page() {
       </Section>
 
       {/* ABOUT (FIXED) */}
-      <div id="about" className="h-px" />
+      <div id="about" className="h-px scroll-mt-28" />
       <Section
         eyebrow={dict.about.eyebrow}
         title={dict.about.title}
@@ -403,7 +405,7 @@ export default function Page() {
       </Section>
 
       {/* CONTACT */}
-      <div id="contact" className="h-px" />
+      <div id="contact" className="h-px scroll-mt-28" />
       <section className="relative py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="overflow-hidden rounded-[2.5rem] border border-border bg-card shadow-sm">

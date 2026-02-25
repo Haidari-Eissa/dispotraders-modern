@@ -13,11 +13,11 @@ const SHAPES = [
 
 export function FloatingShapes() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden lg:block">
       {SHAPES.map((shape, i) => (
         <div
           key={i}
-          className={`absolute ${shape.size} opacity-10 will-change-transform`}
+          className={`absolute ${shape.size} opacity-[0.06]`}
           style={{ left: shape.left, top: shape.top, transform: `rotate(${shape.rotate}deg)` }}
         >
           {shape.icon}
