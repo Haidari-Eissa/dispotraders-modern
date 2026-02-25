@@ -182,7 +182,7 @@ export default function Page() {
       </div>
 
       {/* Sticky Nav */}
-      <div className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+      <div dir="ltr" className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
           <div ref={mobileMenuRef} className="flex items-center justify-between" onClickCapture={handleHeaderClick}>
             <a
