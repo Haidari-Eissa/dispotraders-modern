@@ -14,7 +14,7 @@ import {
   Timer,
   X,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
@@ -128,6 +128,7 @@ export default function Page() {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuToggleRef = useRef<HTMLButtonElement | null>(null);
 
   const pathname = usePathname();
   const lang: LanguageCode = pathname?.includes('/ur') ? 'ur' : 'en';
@@ -164,6 +165,13 @@ export default function Page() {
     };
   }, [mobileMenuOpen]);
 
+  const handleHeaderClick = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!mobileMenuOpen) return;
+    const target = event.target as Node;
+    if (mobileMenuToggleRef.current?.contains(target)) return;
+    setMobileMenuOpen(false);
+  };
+
   return (
     <main id="top" className="relative min-h-screen overflow-x-clip bg-background text-foreground selection:bg-primary/10">
       <FloatingShapes />
@@ -176,7 +184,7 @@ export default function Page() {
       {/* Sticky Nav */}
       <div className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
-          <div ref={mobileMenuRef} className="flex items-center justify-between">
+          <div ref={mobileMenuRef} className="flex items-center justify-between" onClickCapture={handleHeaderClick}>
             <a
               href="#top"
               aria-label="Go to top"
@@ -205,6 +213,7 @@ export default function Page() {
                 {dict.navigation.get_offer} <ArrowRight className="h-4 w-4" />
               </a>
               <button
+                ref={mobileMenuToggleRef}
                 type="button"
                 aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
