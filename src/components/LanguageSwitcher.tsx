@@ -71,7 +71,8 @@ export default function LanguageSwitcher() {
       </div>
 
       {/* Buttons for larger screens */}
-      <div className="hidden md:flex gap-2 text-sm font-bold bg-gray-800/50 p-2 rounded-lg border border-gray-700">
+      <div className="hidden md:flex items-center gap-2 text-sm font-bold bg-gray-800/50 p-2 rounded-lg border border-gray-700">
+        <Image src="/globe.svg" alt="Language" width={18} height={18} />
         <button 
           onClick={() => handleSwitch('en')} 
           className={`px-2 py-1 rounded ${!pathname?.includes('/ur') ? 'bg-blue-600 text-white' : 'hover:text-blue-400'}`}
