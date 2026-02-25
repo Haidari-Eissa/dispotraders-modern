@@ -14,7 +14,7 @@ import {
   Timer,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
@@ -127,6 +127,7 @@ export default function Page() {
   const heroY = useTransform(scrollY, [0, 400], [0, 24]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();
   const lang: LanguageCode = pathname?.includes('/ur') ? 'ur' : 'en';
@@ -136,8 +137,35 @@ export default function Page() {
   const phone = "+123 456 7890";
   const whatsapp = "https://wa.me/1234567890";
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const closeOnOutsideClick = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node | null;
+      if (!target) return;
+      if (mobileMenuRef.current?.contains(target)) return;
+      setMobileMenuOpen(false);
+    };
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("touchstart", closeOnOutsideClick, { passive: true });
+    document.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", closeOnOutsideClick);
+      document.removeEventListener("touchstart", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [mobileMenuOpen]);
+
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-background text-foreground selection:bg-primary/10">
+    <main id="top" className="relative min-h-screen overflow-x-clip bg-background text-foreground selection:bg-primary/10">
       <FloatingShapes />
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-[16%] left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full bg-primary/4 blur-3xl" />
@@ -148,8 +176,15 @@ export default function Page() {
       {/* Sticky Nav */}
       <div className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
-          <div className="flex items-center justify-between">
-            <BrandLogo />
+          <div ref={mobileMenuRef} className="flex items-center justify-between">
+            <a
+              href="#top"
+              aria-label="Go to top"
+              className="rounded-lg outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <BrandLogo />
+            </a>
 
             <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
               <a className="transition-colors hover:text-foreground" href="#why">{dict.navigation.why}</a>
@@ -212,14 +247,11 @@ export default function Page() {
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              className="mb-6 inline-flex flex-wrap items-center gap-2"
+              className="mb-4"
             >
               <span className="inline-flex items-center rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 {dict.hero.kicker}
               </span>
-              <Pill>{dict.hero.pill_delivery}</Pill>
-              <Pill>{dict.hero.pill_hygiene}</Pill>
-              <Pill>{dict.hero.pill_price}</Pill>
             </motion.div>
 
             <motion.h1
