@@ -214,6 +214,9 @@ export default function Page() {
               variants={fadeUp}
               className="mb-6 inline-flex flex-wrap items-center gap-2"
             >
+              <span className="inline-flex items-center rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                {dict.hero.kicker}
+              </span>
               <Pill>{dict.hero.pill_delivery}</Pill>
               <Pill>{dict.hero.pill_hygiene}</Pill>
               <Pill>{dict.hero.pill_price}</Pill>
@@ -224,7 +227,7 @@ export default function Page() {
               animate="visible"
               custom={1}
               variants={fadeUp}
-              className="text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
+              className="max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
             >
               {dict.hero.title_start}{" "}
               <span className="text-muted-foreground"> {dict.hero.title_highlight} </span>
@@ -236,7 +239,7 @@ export default function Page() {
               animate="visible"
               custom={2}
               variants={fadeUp}
-              className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl"
+              className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg"
             >
               {dict.hero.description}
             </motion.p>
