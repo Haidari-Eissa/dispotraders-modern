@@ -248,67 +248,107 @@ export default function Page() {
       {/* HERO */}
       <section className="relative z-10 pt-20 pb-16 sm:pt-32 sm:pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            style={prefersReducedMotion ? undefined : { y: heroY, opacity: heroOpacity }}
-            className="max-w-3xl"
-          >
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              className="mb-4"
+              style={prefersReducedMotion ? undefined : { y: heroY, opacity: heroOpacity }}
+              className="max-w-3xl"
             >
-              <span className="inline-flex items-center rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                {dict.hero.kicker}
-              </span>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+                className="mb-4"
+              >
+                <span className="inline-flex items-center rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  {dict.hero.kicker}
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                custom={1}
+                variants={fadeUp}
+                className="max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+              >
+                {dict.hero.title_start}{" "}
+                <span className="text-muted-foreground"> {dict.hero.title_highlight} </span>
+                {" "}{dict.hero.title_end}
+              </motion.h1>
+
+              <motion.p
+                initial="hidden"
+                animate="visible"
+                custom={2}
+                variants={fadeUp}
+                className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg"
+              >
+                {dict.hero.description}
+              </motion.p>
+
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                custom={3}
+                variants={fadeUp}
+                className="mt-10 flex flex-col gap-4 sm:flex-row"
+              >
+                <a
+                  href="#products"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
+                >
+                  {dict.hero.btn_products} <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href={whatsapp}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-secondary-foreground/10"
+                >
+                  {dict.hero.btn_whatsapp} <Phone className="h-4 w-4" />
+                </a>
+              </motion.div>
             </motion.div>
 
-            <motion.h1
-              initial="hidden"
-              animate="visible"
-              custom={1}
-              variants={fadeUp}
-              className="max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
-            >
-              {dict.hero.title_start}{" "}
-              <span className="text-muted-foreground"> {dict.hero.title_highlight} </span>
-              {" "}{dict.hero.title_end}
-            </motion.h1>
-
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              custom={2}
-              variants={fadeUp}
-              className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg"
-            >
-              {dict.hero.description}
-            </motion.p>
-
             <motion.div
-              initial="hidden"
-              animate="visible"
-              custom={3}
-              variants={fadeUp}
-              className="mt-10 flex flex-col gap-4 sm:flex-row"
+              initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
+              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+              className="relative mx-auto w-full max-w-xl lg:mx-0"
             >
-              <a
-                href="#products"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
-              >
-                {dict.hero.btn_products} <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href={whatsapp}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-secondary-foreground/10"
-              >
-                {dict.hero.btn_whatsapp} <Phone className="h-4 w-4" />
-              </a>
+              <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-cyan-400/15 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-10 -right-8 h-44 w-44 rounded-full bg-blue-500/15 blur-3xl" />
+
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_30px_80px_-35px_rgba(56,189,248,0.45)] sm:aspect-[16/12] lg:aspect-[4/5]">
+                <Image
+                  src="/op1.jpg"
+                  alt="Disposable tableware products"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-slate-900/10 to-cyan-100/10" />
+              </div>
+
+              <div className="absolute -left-3 top-6 rounded-2xl border border-border/80 bg-background/90 px-4 py-3 shadow-lg backdrop-blur">
+                <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+                  <Timer className="h-4 w-4 text-cyan-300" />
+                  <span>{dict.features.response_title}</span>
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">{dict.hero.quick_reply}</p>
+              </div>
+
+              <div className="absolute -right-3 bottom-7 rounded-2xl border border-border/80 bg-background/90 px-4 py-3 shadow-lg backdrop-blur">
+                <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+                  <Package className="h-4 w-4 text-cyan-300" />
+                  <span>{dict.features.bulk_title}</span>
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">{dict.hero.audience_short}</p>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Floating highlight cards */}
-          <div className="mt-20 grid gap-6 sm:grid-cols-3">
+          <div className="mt-16 grid gap-6 sm:grid-cols-3">
             {[
               { t: dict.features.hygiene_title, d: dict.features.hygiene_desc, i: <ShieldCheck className="h-5 w-5" /> },
               { t: dict.features.response_title, d: dict.features.response_desc, i: <Timer className="h-5 w-5" /> },
