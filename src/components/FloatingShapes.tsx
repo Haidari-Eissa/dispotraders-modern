@@ -1,27 +1,21 @@
 "use client";
 
 const SHAPES = [
-  { icon: "🥤", size: "text-4xl", left: "10vw", top: "20vh", rotate: -15 },
-  { icon: "🥤", size: "text-5xl", left: "80vw", top: "30vh", rotate: 10 },
-  { icon: "🥤", size: "text-3xl", left: "30vw", top: "70vh", rotate: 5 },
-  { icon: "🍴", size: "text-4xl", left: "20vw", top: "50vh", rotate: 20 },
-  { icon: "🍴", size: "text-5xl", left: "70vw", top: "80vh", rotate: -5 },
-  { icon: "🍽️", size: "text-5xl", left: "90vw", top: "60vh", rotate: 15 },
-  { icon: "🍽️", size: "text-4xl", left: "5vw", top: "80vh", rotate: -20 },
-  { icon: "🍽️", size: "text-6xl", left: "42vw", top: "40vh", rotate: 0 },
+  { left: "6%", top: "12%", size: 220, color: "bg-cyan-300/6" },
+  { left: "78%", top: "16%", size: 200, color: "bg-sky-300/5" },
+  { left: "16%", top: "56%", size: 180, color: "bg-blue-300/5" },
+  { left: "70%", top: "62%", size: 230, color: "bg-cyan-200/5" },
 ];
 
 export function FloatingShapes() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden lg:block">
+    <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden lg:block">
       {SHAPES.map((shape, i) => (
         <div
           key={i}
-          className={`absolute ${shape.size} opacity-[0.06]`}
-          style={{ left: shape.left, top: shape.top, transform: `rotate(${shape.rotate}deg)` }}
-        >
-          {shape.icon}
-        </div>
+          className={`absolute rounded-full blur-3xl ${shape.color}`}
+          style={{ left: shape.left, top: shape.top, height: shape.size, width: shape.size }}
+        />
       ))}
     </div>
   );

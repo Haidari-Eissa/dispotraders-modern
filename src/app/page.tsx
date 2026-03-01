@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -123,9 +123,6 @@ function BrandLogo() {
 
 export default function Page() {
   const prefersReducedMotion = useReducedMotion();
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 400], [0, 24]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement | null>(null);
@@ -176,9 +173,9 @@ export default function Page() {
     <main id="top" className="relative min-h-screen overflow-x-clip bg-background text-foreground selection:bg-primary/10">
       <FloatingShapes />
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-[16%] left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full bg-primary/4 blur-3xl" />
-        <div className="absolute top-[24%] right-[-8%] h-[520px] w-[520px] rounded-full bg-cyan-500/5 blur-3xl" />
-        <div className="absolute bottom-[-12%] left-[-8%] h-[500px] w-[500px] rounded-full bg-blue-500/5 blur-3xl" />
+        <div className="absolute -top-[12%] left-1/2 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-primary/5 blur-2xl" />
+        <div className="absolute top-[28%] right-[-6%] h-[360px] w-[360px] rounded-full bg-cyan-500/5 blur-2xl" />
+        <div className="absolute bottom-[-8%] left-[-6%] h-[360px] w-[360px] rounded-full bg-blue-500/5 blur-2xl" />
       </div>
 
       {/* Sticky Nav */}
@@ -250,7 +247,9 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
             <motion.div
-              style={prefersReducedMotion ? undefined : { y: heroY, opacity: heroOpacity }}
+              initial={prefersReducedMotion ? undefined : { opacity: 0, y: 14 }}
+              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
               className="max-w-3xl"
             >
               <motion.div
@@ -354,12 +353,8 @@ export default function Page() {
               { t: dict.features.response_title, d: dict.features.response_desc, i: <Timer className="h-5 w-5" /> },
               { t: dict.features.bulk_title, d: dict.features.bulk_desc, i: <Package className="h-5 w-5" /> },
             ].map((x, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * i, duration: 0.5 }}
                 className="rounded-2xl border border-border bg-card/50 p-6 backdrop-blur-sm"
               >
                 <div className="flex items-center gap-3">
@@ -369,7 +364,7 @@ export default function Page() {
                   <p className="font-semibold text-foreground">{x.t}</p>
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">{x.d}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -415,13 +410,9 @@ export default function Page() {
       >
         <div className="grid gap-6 md:grid-cols-3">
           {dict.products.items.map((p: ProductItem, i: number) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.5 }}
-              className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/20 hover:shadow-md"
+              className="group rounded-2xl border border-border bg-card p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-md"
             >
               {p.image && (
                 <div className="aspect-video overflow-hidden rounded-lg border border-border mb-4">
@@ -448,7 +439,7 @@ export default function Page() {
                    {dict.products.badges.quick}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </Section>
