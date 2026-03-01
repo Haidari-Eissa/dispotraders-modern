@@ -20,6 +20,12 @@ import { usePathname } from 'next/navigation';
 import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
 import { FloatingShapes } from "@/components/FloatingShapes";
 
+const HERO_SLIDES = [
+  { src: "/op1.jpg", alt: "Disposable tableware products - cups" },
+  { src: "/op2.jpg", alt: "Disposable tableware products - plates and bowls" },
+  { src: "/op3.jpg", alt: "Disposable tableware products - containers" },
+];
+
 function Section({
   id,
   eyebrow,
@@ -115,6 +121,7 @@ function BrandLogo() {
 export default function Page() {
   const prefersReducedMotion = useReducedMotion();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement | null>(null);
 
@@ -152,6 +159,14 @@ export default function Page() {
       document.removeEventListener("keydown", closeOnEscape);
     };
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, prefersReducedMotion ? 5000 : 3200);
+
+    return () => window.clearInterval(interval);
+  }, [prefersReducedMotion]);
 
   const handleHeaderClick = (event: ReactMouseEvent<HTMLDivElement>) => {
     if (!mobileMenuOpen) return;
@@ -280,14 +295,17 @@ export default function Page() {
               <div className="pointer-events-none absolute -bottom-10 -right-8 h-44 w-44 rounded-full bg-blue-500/15 blur-3xl" />
 
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_30px_80px_-35px_rgba(56,189,248,0.45)] sm:aspect-[16/12] lg:aspect-[4/5]">
-                <Image
-                  src="/op1.jpg"
-                  alt="Disposable tableware products"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  priority
-                />
+                {HERO_SLIDES.map((slide, idx) => (
+                  <Image
+                    key={slide.src}
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    className={`object-cover transition-opacity duration-700 ${idx === activeHeroSlide ? "opacity-100" : "opacity-0"}`}
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    priority={idx === 0}
+                  />
+                ))}
                 <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-slate-900/10 to-cyan-100/10" />
               </div>
 
