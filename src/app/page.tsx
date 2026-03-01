@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -19,15 +19,6 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
 import { FloatingShapes } from "@/components/FloatingShapes";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.1 * i, duration: 0.5, ease: "easeOut" },
-  }),
-};
 
 function Section({
   id,
@@ -246,52 +237,24 @@ export default function Page() {
       <section className="relative z-10 pt-20 pb-16 sm:pt-32 sm:pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-            <motion.div
-              initial={prefersReducedMotion ? undefined : { opacity: 0, y: 14 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="max-w-3xl"
-            >
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={fadeUp}
-                className="mb-4"
-              >
+            <div className="max-w-3xl">
+              <div className="mb-4">
                 <span className="inline-flex items-center rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                   {dict.hero.kicker}
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h1
-                initial="hidden"
-                animate="visible"
-                custom={1}
-                variants={fadeUp}
-                className="max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
-              >
+              <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 {dict.hero.title_start}{" "}
                 <span className="text-muted-foreground"> {dict.hero.title_highlight} </span>
                 {" "}{dict.hero.title_end}
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                initial="hidden"
-                animate="visible"
-                custom={2}
-                variants={fadeUp}
-                className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg"
-              >
+              <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
                 {dict.hero.description}
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                custom={3}
-                variants={fadeUp}
-                className="mt-10 flex flex-col gap-4 sm:flex-row"
-              >
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#products"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
@@ -304,8 +267,8 @@ export default function Page() {
                 >
                   {dict.hero.btn_whatsapp} <Phone className="h-4 w-4" />
                 </a>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             <motion.div
               initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
