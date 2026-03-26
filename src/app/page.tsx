@@ -296,15 +296,13 @@ export default function Page() {
 
               <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_30px_80px_-35px_rgba(56,189,248,0.45)] sm:min-h-[460px] sm:aspect-[16/12] lg:aspect-[4/5]">
                 {HERO_SLIDES.map((slide, idx) => (
-                  <Image
+                  <img
                     key={slide.src}
                     src={slide.src}
                     alt={slide.alt}
-                    fill
-                    className="object-cover transition-opacity duration-700"
+                    className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
                     style={{ opacity: idx === activeHeroSlide ? 1 : 0 }}
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                    priority={idx === 0}
+                    loading={idx === 0 ? "eager" : "lazy"}
                     aria-hidden={idx !== activeHeroSlide}
                   />
                 ))}
