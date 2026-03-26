@@ -33,8 +33,34 @@ body {
   @apply bg-background text-foreground;
 }
 
+.hero-slide {
+  opacity: 0;
+  animation: heroFade 12s infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes heroFade {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  33%,
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero-slide {
+    animation: none;
+    opacity: 0;
+  }
+
+  .hero-slide:first-child {
+    opacity: 1;
   }
 }

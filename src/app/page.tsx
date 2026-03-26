@@ -124,7 +124,6 @@ function BrandLogo() {
 export default function Page() {
   const prefersReducedMotion = useReducedMotion();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement | null>(null);
 
@@ -162,14 +161,6 @@ export default function Page() {
       document.removeEventListener("keydown", closeOnEscape);
     };
   }, [mobileMenuOpen]);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, prefersReducedMotion ? 5000 : 3200);
-
-    return () => window.clearInterval(interval);
-  }, [prefersReducedMotion]);
 
   const handleHeaderClick = (event: ReactMouseEvent<HTMLDivElement>) => {
     if (!mobileMenuOpen) return;
@@ -303,10 +294,13 @@ export default function Page() {
                     key={slide.src}
                     src={slide.src}
                     alt={slide.alt}
-                    className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
-                    style={{ opacity: idx === activeHeroSlide ? 1 : 0 }}
+                    className="hero-slide absolute inset-0 h-full w-full object-cover"
+                    style={{
+                      animationDelay: `${idx * 4}s`,
+                      animationDuration: `${HERO_SLIDES.length * 4}s`,
+                    }}
                     loading={idx === 0 ? "eager" : "lazy"}
-                    aria-hidden={idx !== activeHeroSlide}
+                    aria-hidden={idx !== 0}
                   />
                 ))}
                 <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-slate-900/10 to-cyan-100/10" />
