@@ -294,16 +294,18 @@ export default function Page() {
               <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-cyan-400/15 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-10 -right-8 h-44 w-44 rounded-full bg-blue-500/15 blur-3xl" />
 
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_30px_80px_-35px_rgba(56,189,248,0.45)] sm:aspect-[16/12] lg:aspect-[4/5]">
+              <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_30px_80px_-35px_rgba(56,189,248,0.45)] sm:min-h-[460px] sm:aspect-[16/12] lg:aspect-[4/5]">
                 {HERO_SLIDES.map((slide, idx) => (
                   <Image
                     key={slide.src}
                     src={slide.src}
                     alt={slide.alt}
                     fill
-                    className={`object-cover transition-opacity duration-700 ${idx === activeHeroSlide ? "opacity-100" : "opacity-0"}`}
+                    className="object-cover transition-opacity duration-700"
+                    style={{ opacity: idx === activeHeroSlide ? 1 : 0 }}
                     sizes="(max-width: 1024px) 100vw, 42vw"
                     priority={idx === 0}
+                    aria-hidden={idx !== activeHeroSlide}
                   />
                 ))}
                 <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-slate-900/10 to-cyan-100/10" />
