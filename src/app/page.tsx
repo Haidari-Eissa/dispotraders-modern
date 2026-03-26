@@ -19,11 +19,14 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePathname } from 'next/navigation';
 import { getDictionary, type Dictionary, type LanguageCode } from '@/lib/dictionaries';
 import { FloatingShapes } from "@/components/FloatingShapes";
+import op1 from "@/assets/images/op1.jpg";
+import op2 from "@/assets/images/op2.jpg";
+import op3 from "@/assets/images/op3.jpg";
 
 const HERO_SLIDES = [
-  { src: "/op1.jpg", alt: "Disposable tableware products - cups" },
-  { src: "/op2.jpg", alt: "Disposable tableware products - plates and bowls" },
-  { src: "/op3.jpg", alt: "Disposable tableware products - containers" },
+  { src: op1.src, alt: "Disposable tableware products - cups" },
+  { src: op2.src, alt: "Disposable tableware products - plates and bowls" },
+  { src: op3.src, alt: "Disposable tableware products - containers" },
 ];
 
 function Section({

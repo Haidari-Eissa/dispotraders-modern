@@ -1,3 +1,10 @@
+import op1 from "@/assets/images/op1.jpg";
+import op2 from "@/assets/images/op2.jpg";
+import op3 from "@/assets/images/op3.jpg";
+import op4 from "@/assets/images/op4.jpg";
+import op5 from "@/assets/images/op5.jpg";
+import op6 from "@/assets/images/op6.jpg";
+
 export const dictionaries = {
   en: {
     navigation: {
@@ -48,12 +55,12 @@ export const dictionaries = {
       title: "Best sellers",
       desc: "Start with these. Later you can add real products + pictures.",
       items: [
-        { name: "Cups", info: "Cold & hot drink cups, lids available.", image: "/op1.jpg" },
-        { name: "Plates & bowls", info: "Disposable plates and bowls for daily use.", image: "/op2.jpg" },
-        { name: "Containers", info: "Food containers for takeaway & delivery.", image: "/op3.jpg" },
-        { name: "Aluminum trays", info: "Heat-friendly trays and foil options.", image: "/op4.jpg" },
-        { name: "Cutlery", info: "Disposable spoons, forks and knives.", image: "/op5.jpg" },
-        { name: "Packaging", info: "Simple packaging solutions for shops.", image: "/op6.jpg" },
+        { name: "Cups", info: "Cold & hot drink cups, lids available.", image: op1.src },
+        { name: "Plates & bowls", info: "Disposable plates and bowls for daily use.", image: op2.src },
+        { name: "Containers", info: "Food containers for takeaway & delivery.", image: op3.src },
+        { name: "Aluminum trays", info: "Heat-friendly trays and foil options.", image: op4.src },
+        { name: "Cutlery", info: "Disposable spoons, forks and knives.", image: op5.src },
+        { name: "Packaging", info: "Simple packaging solutions for shops.", image: op6.src },
       ],
       badges: {
         bulk: "Bulk",
@@ -133,12 +140,12 @@ export const dictionaries = {
       title: "سب سے زیادہ فروخت",
       desc: "ان کے ساتھ شروع کریں۔ بعد میں آپ مزید مصنوعات اور تصاویر شامل کر سکتے ہیں۔",
       items: [
-        { name: "کپ", info: "ٹھنڈے اور گرم مشروبات کے کپ، ڈھکن دستیاب ہیں۔", image: "/op1.jpg" },
-        { name: "پلیٹیں اور پیالے", info: "روزانہ استعمال کے لیے ڈسپوزایبل پلیٹیں اور پیالے۔", image: "/op2.jpg" },
-        { name: "کنٹینرز", info: "کھانے کے پارسل اور ڈلیوری کے لیے کنٹینرز۔", image: "/op3.jpg" },
-        { name: "ایلومینیم ٹرے", info: "کھانا گرم رکھنے والی ٹرے اور فوائل۔", image: "/op4.jpg" },
-        { name: "چمچ اور کانٹے", info: "ڈسپوزایبل چمچ، کانٹے اور چھری۔", image: "/op5.jpg" },
-        { name: "پیکیجنگ", info: "دکانوں کے لیے سادہ پیکیجنگ کا سامان۔", image: "/op6.jpg" },
+        { name: "کپ", info: "ٹھنڈے اور گرم مشروبات کے کپ، ڈھکن دستیاب ہیں۔", image: op1.src },
+        { name: "پلیٹیں اور پیالے", info: "روزانہ استعمال کے لیے ڈسپوزایبل پلیٹیں اور پیالے۔", image: op2.src },
+        { name: "کنٹینرز", info: "کھانے کے پارسل اور ڈلیوری کے لیے کنٹینرز۔", image: op3.src },
+        { name: "ایلومینیم ٹرے", info: "کھانا گرم رکھنے والی ٹرے اور فوائل۔", image: op4.src },
+        { name: "چمچ اور کانٹے", info: "ڈسپوزایبل چمچ، کانٹے اور چھری۔", image: op5.src },
+        { name: "پیکیجنگ", info: "دکانوں کے لیے سادہ پیکیجنگ کا سامان۔", image: op6.src },
       ],
       badges: {
         bulk: "تھوک",
