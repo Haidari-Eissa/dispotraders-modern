@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  images: {
+    unoptimized: true,
+  },
   reactCompiler: true,
 };
 
