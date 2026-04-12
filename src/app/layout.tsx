@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Noto_Nastaliq_Urdu } from "next/font/google"; // <--- Imported Noto
+import { Inter, Noto_Nastaliq_Urdu } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,7 +8,6 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-// <--- Configure the Urdu Font
 const urduFont = Noto_Nastaliq_Urdu({
   subsets: ["arabic"],
   weight: ["400", "700"],
@@ -16,8 +15,25 @@ const urduFont = Noto_Nastaliq_Urdu({
 });
 
 export const metadata: Metadata = {
-  title: "Dispotraders",
-  description: "Disposable tableware for Quetta.",
+  title: "Dispotraders – Disposable Tableware | Hazara Town, Quetta",
+  description:
+    "Buy disposable cups, plates, containers, aluminum trays and packaging in Hazara Town, Quetta. Fast WhatsApp ordering, same-day delivery. Affordable bulk prices for shops, events and homes.",
+  keywords: [
+    "disposable cups Quetta",
+    "disposable plates Quetta",
+    "Hazara Town supplier",
+    "کوئٹہ ڈسپوزایبل",
+    "ہزارہ ٹاؤن",
+    "plastic cups Quetta",
+    "aluminum trays Quetta",
+  ],
+  openGraph: {
+    title: "Dispotraders – Hazara Town Disposable Supplier, Quetta",
+    description:
+      "Same-day delivery in Hazara Town. Order cups, plates, containers via WhatsApp.",
+    locale: "ur_PK",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -42,10 +58,11 @@ export default function RootLayout({
           />
         )}
       </head>
-      {/* Add both variables to the body class list */}
-      <body className={`${inter.variable} ${urduFont.variable} antialiased bg-slate-950 text-white`}>
+      <body
+        className={`${inter.variable} ${urduFont.variable} antialiased bg-slate-950 text-white`}
+      >
         {children}
       </body>
     </html>
   );
-} 
+}

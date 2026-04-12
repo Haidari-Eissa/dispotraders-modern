@@ -33,6 +33,7 @@ body {
   @apply bg-background text-foreground;
 }
 
+/* ── Hero Slider ───────────────────────────────────────────── */
 .hero-slide {
   opacity: 0;
   animation: heroFade 12s infinite;
@@ -50,6 +51,53 @@ body {
   }
 }
 
+/* ── Float (decorative blobs) ──────────────────────────────── */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) scale(1.03);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* ── WhatsApp button pulse glow ────────────────────────────── */
+@keyframes wa-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
+  }
+}
+
+.animate-wa-glow {
+  animation: wa-glow 2.4s ease-in-out infinite;
+}
+
+/* ── Step number shimmer ───────────────────────────────────── */
+@keyframes step-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── Reduced motion overrides ──────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -62,5 +110,11 @@ body {
 
   .hero-slide:first-child {
     opacity: 1;
+  }
+
+  .animate-float,
+  .animate-float-slow,
+  .animate-wa-glow {
+    animation: none;
   }
 }
