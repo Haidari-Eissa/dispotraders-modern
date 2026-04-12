@@ -203,7 +203,7 @@ export default function Page() {
       {/* ── NAVIGATION ─────────────────────────────────────────────────── */}
       <div
         dir="ltr"
-        className="sticky top-0 z-50 border-b border-white/6 bg-slate-950/80 backdrop-blur-xl"
+        className="sticky top-0 z-50 bg-slate-950/80 shadow-[0_2px_24px_rgba(0,0,0,0.55)] backdrop-blur-xl"
       >
         <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
           <div
@@ -426,7 +426,11 @@ export default function Page() {
       </section>
 
       {/* ── STATS BAR ──────────────────────────────────────────────────── */}
-      <section className="relative z-10 border-y border-white/6 bg-white/3 backdrop-blur-sm">
+      {/* centered gradient divider */}
+      <div className="flex justify-center py-1">
+        <div className="h-px w-72 bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+      </div>
+      <section className="relative z-10 bg-white/3 shadow-[0_4px_40px_rgba(0,0,0,0.35)] backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {[
@@ -466,6 +470,11 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* centered gradient divider */}
+      <div className="flex justify-center py-1">
+        <div className="h-px w-72 bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+      </div>
 
       {/* ── WHY US ─────────────────────────────────────────────────────── */}
       <div id="why" className="h-px scroll-mt-28" />
